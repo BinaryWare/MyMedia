@@ -25,5 +25,11 @@ describe('Files Users Test', function() {
         fuser.deleteUserDir(USER_ID);
         done();
     });
+    
+    it('Should check if the user directory does not exist.', function(done){
+        var user_dir_exists = fuser.isUserDirExists(USER_ID);
+        assert.equals(false, user_dir_exists);
+        done();
+    });
 });
 

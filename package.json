@@ -27,7 +27,7 @@
   "scripts": {
     "generate_doc": "cd docs && gulp default && exit",
     "run_app": "./node_modules/.bin/electron .",
-    "run_node_app": "node mymedia_main.js",
+    "run_node_app": "node mymedia_main.js no_gui",
     "run_unit_testing_fuser": "mocha ./test/fusers_test/fusers_unit_test.js && exit"
   },
   "license": "ISC",

@@ -8,15 +8,28 @@ online resources like online channels.
 
 --------------------------------------------------------------------------------
 
-### Application Status --> In Development ###
+### Application Status ###
 
-### Application Website Status --> In Development ###
+> In Development (Comming Soon)
+
+
+### Application Website Status ###
+
+> In Development
 
 --------------------------------------------------------------------------------
 
 ### Supported Platforms ###
 
-#### Windows ####
-#### Linux ####
+- Windows
+- Linux
+
+--------------------------------------------------------------------------------
+
+### MyMedia Application Structure ###
+
+There is the structure of the all application.
+
+![Application Structure](https://raw.githubusercontent.com/Bneto/MyMedia/master/MyMediaV_1.0.png)
 
 --------------------------------------------------------------------------------

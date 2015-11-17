@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: console/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,62 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: console/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var colors = require('colors');
 
+/**
+ * @param {String|Object} msg
+ * 
+ * @returns {undefined}
+ * 
+ * @description Outputs the message with color (GREY).
+ */
+exports.log = function(msg){
+    console.log((msg).grey);
+};
 
-    <h3> </h3>
+/**
+ * @param {String|Object} msg
+ * 
+ * @returns {undefined}
+ * 
+ * @description Outputs the message with color (GREEN).
+ */
+exports.info = function(msg){
+    console.log((msg).green);
+};
 
+/**
+ * @param {String|Object} msg
+ * 
+ * @returns {undefined}
+ * 
+ * @description Outputs the message with color (RED).
+ */
+exports.error = function(msg){
+    console.log((msg).red);
+};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * @param {String|Object} msg
+ * 
+ * @returns {undefined}
+ * 
+ * @description Outputs the message with color (YELLOW).
+ */
+exports.warn = function(msg){
+    console.log((msg).yellow);
+};</code></pre>
+        </article>
+    </section>
 
 
 

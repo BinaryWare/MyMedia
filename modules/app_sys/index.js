@@ -7,14 +7,15 @@ var BROWSER_SETTINGS = {
     'show': false,
     'center': true,
     'auto-hide-menu-bar': true,
-    'resizable': true
+    'resizable': true,
+    'icon':'mm_icon.png'
 };
 
 exports.loadAppSys = function(){
     app.on('ready', function(){
         bWinObj = new BrowserWindow(BROWSER_SETTINGS);
     
-        bWinObj.loadUrl('http://localhost:8000/main_stats');
+        bWinObj.loadUrl('http://localhost:8000/');
         bWinObj.show();    
     });
     
