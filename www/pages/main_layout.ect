@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% if @title=='' || @title==undefined: %>
+        <title>MyMedia</title>
+    <% else: %>
+        <title>MyMedia -- <%- @title %></title>
+    <% end %>
+
+    <link rel="icon" href="libs/icon.ico" />
+
+    <% include 'header_layout.ect' %>
+</head>
+<body>
+    <% content %>
+</body>
+</html>

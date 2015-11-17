@@ -1,0 +1,39 @@
+{
+  "opts": {
+    "encoding": "utf8"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": [
+      "jsdoc"
+    ]
+  },
+  "source": {
+    "include": [
+      "mymedia_main.js",
+      "modules/app_sys",
+      "modules/cipher",
+      "modules/console",
+      "modules/db",
+      "modules/fusers",
+      "modules/mem",
+      "modules/web"
+    ],
+    "exclude": [
+      "docs",
+      "node_modules",
+      "www",
+      "test",
+      ".projectKnowledge",
+      ".git",
+	  "nbproject"
+    ],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}
