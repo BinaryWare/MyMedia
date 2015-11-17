@@ -1,3 +1,4 @@
+![Application Icon](https://raw.githubusercontent.com/Bneto/MyMedia/master/mm_icon.png)
 # MyMedia #
 ================================================================================
 
