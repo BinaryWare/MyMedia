@@ -13,3 +13,10 @@ online resources like online channels.
 ### Application Website Status --> In Development ###
 
 --------------------------------------------------------------------------------
+
+### Supported Platforms ###
+
+#### Windows ####
+#### Linux ####
+
+--------------------------------------------------------------------------------
