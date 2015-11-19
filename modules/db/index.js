@@ -1,8 +1,8 @@
-var user_perm = require('./user_permssions/user_permssions.js');
+var user_perm = require('./user_permissions/user_permssions.js');
 var u_perm = require('./user_permissions');
 var cipher = require('../cipher');
 var mem = require('../mem');
-var fuser = require('../fuser')();
+var fuser = require('../fusers')();
 var fs = require('fs');
 var DB_FILE = 'local.dbj';
 var DEFAULT_USER_PERM = [user_perm.ADMIN, user_perm.USER, user_perm.VIEWER];
@@ -41,7 +41,7 @@ function isDBFileExists() {
  */
 function writeDBFile(data) {
     mem.setMemDB(data);
-    fs.writeSync(DB_FILE, JSON.stringify(data));
+    fs.writeFileSync(DB_FILE, JSON.stringify(data));
 }
 
 /**
@@ -51,7 +51,7 @@ function writeDBFile(data) {
  * @description Reads the file and return his result as a string.
  */
 function readDBFile() {
-    return fs.readSync(DB_FILE);
+    return fs.readFileSync(DB_FILE);
 }
 
 /**
@@ -69,9 +69,12 @@ function readDBData() {
             db_res = JSON.parse(readDBFile());
         } catch (ex) {
             writeDBFile(DEFAULT_DB_STRUCT);
+            db_res = DEFAULT_DB_STRUCT;
+        }finally{
+            mem.setMemDB(db_res);    
         }
     }
-
+    
     return db_res;
 }
 
@@ -119,7 +122,7 @@ module.exports = function () {
         var password_c = cipher.encode(password);
         var username_c = cipher.encode(username);
         var db_data = readDBData();
-
+        
         db_data = db_data.dbu.filter(function (item) {
             return ((item.u === username_c) && (item.p === password_c));
         });
@@ -141,22 +144,37 @@ module.exports = function () {
     /**
      * @param {String} username
      * @param {String} password
+     * @param {boolean} isAdmin 
+     * @param {boolean} isUser 
+     * @param {boolean} isViewer 
      * 
      * @returns {boolean}
      * 
      * @description Add user on DB if the user not exists on DB.
      */
-    db_api.add_user = function (username, password) {
+    db_api.add_user = function (username, password, isAdmin, isUser, isViewer) {
         var isUserReg = false;
 
         if (!checkDBUserExists(username)) {
             var db_data = readDBData();
             var user_c = cipher.encode(username);
             var pass_c = cipher.encode(password);
+            var perm = [];
+            
+            if(isAdmin)
+                perm.push(user_perm.ADMIN);
+            
+            if(isUser)
+                perm.push(user_perm.USER);
+            
+            if(isViewer)
+                perm.push(user_perm.VIEWER);
 
+            var perm_c = cipher.encode(perm.toString());
             db_data.dbu.push({
                 u: user_c,
-                p: pass_c
+                p: pass_c,
+                up: perm_c
             });
             writeDBFile(db_data);
 
@@ -179,13 +197,12 @@ module.exports = function () {
      *              and username are correct.
      */
     db_api.del_user = function (username, password) {
-        var isUserDel = false;
+        var isUserDeleted = false;
 
         if (checkDBUserExists(username)) {
             var username_c = cipher.encode(username);
             var password_c = cipher.encode(password);
             var db_data = readDBData();
-            var isUserDeleted = false;
 
             db_data = db_data.dbu.filter(function (item) {
                 var isUserValid = ((item.u !== username_c) && (item.p !== password_c));
@@ -199,11 +216,11 @@ module.exports = function () {
 
             if (isUserDeleted) {
                 writeDBFile({dbu: db_data});
-                isUserDel = true;
+                fuser.deleteUserDir(username_c);
             }
         }
 
-        return isUserDel;
+        return isUserDeleted;
     };
 
     /**

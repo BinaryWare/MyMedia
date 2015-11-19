@@ -29,7 +29,7 @@ online resources like online channels.
 
 ### MyMedia Application Structure ###
 
-There is the structure of the all application.
+There is the structure of all application.
 
 ![Application Structure](https://raw.githubusercontent.com/Bneto/MyMedia/master/MyMediaV_1.0.png)
 

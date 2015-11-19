@@ -26,7 +26,7 @@
       "test",
       ".projectKnowledge",
       ".git",
-	  "nbproject"
+      "nbproject"
     ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"
