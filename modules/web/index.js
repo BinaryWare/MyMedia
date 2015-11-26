@@ -2,7 +2,7 @@ var KEY_COOKIE       = 'my#M3d1@!#!2015!';
 var ECT              = require('ect');
 var body_parser      = require('body-parser');
 var cookie_parser    = require('cookie-parser');
-var sec_routes       = ['/main'];
+var sec_routes       = ['/main', '/mmapi/user/logout'];
 var HEADERS_SETTINGS = {
                         'X-Frame-Options': 'deny',
                         'X-XSS-Protection': '1; mode=block',
@@ -14,6 +14,7 @@ var renderECT        = ECT({
                        });
 var loadEctFile      = require('./loadFiles.js')(renderECT);
 var web_api          = require('./api_web_routes');
+var cipher           = require('../cipher');
 
 exports.loadWebServer = function (express, server) {
     //Third-party functions
@@ -60,7 +61,7 @@ exports.loadWebServer = function (express, server) {
      * Description: Shows the web page file (Depends on the page parameter)
      **/
     server.get('/', function (req, res) {
-        loadEctFile.render(res, 'login');
+        res.redirect('/login');
     });
 
     /**
@@ -72,10 +73,22 @@ exports.loadWebServer = function (express, server) {
      **/
     server.get('/:page', function (req, res) {
         var page = req.params.page;
+        var cookies = req.cookies;
+        var mmu = cookies.mmu;
+        var data = {};
         
         if(page===undefined)
             page = 'login';
         
-        loadEctFile.render(res, page);
+        if(mmu!==undefined){
+            var dec_mmu = cipher.decode(mmu);
+            var dec_mmu_arr = dec_mmu.split(";");
+            var dec_mmu_user = dec_mmu_arr[0];
+            
+            data.isUserLogged = true;
+            data.username = dec_mmu_user;
+        }
+        
+        loadEctFile.render(res, page, data);
     });
 };

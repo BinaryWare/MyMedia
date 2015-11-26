@@ -2,3 +2,9 @@
     border-width: 1px;
     border-bottom-color: white;
 }
+
+.navbar-default .navbar-brand:hover,.navbar-default .navbar-nav li a:hover {
+    background-color: white;
+    color: black;
+}
+

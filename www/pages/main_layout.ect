@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <% if @title=='' || @title==undefined: %>
+    <% if @title==undefined: %>
         <title>MyMedia</title>
     <% else: %>
         <title>MyMedia -- <%- @title %></title>
@@ -12,7 +12,9 @@
     <% include 'header_layout.ect' %>
 </head>
 <body>
-    <% include 'main_menu.ect' %>
+    <% if @isUserLogged!=undefined: %>
+        <% include 'main_menu.ect' %>
+    <% end %>
     
     <% content %>
 </body>
