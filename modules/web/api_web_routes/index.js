@@ -1,5 +1,6 @@
 exports.loadWebApi = function (server) {
-    var db = require('../../db');
+    var db = require('../../db')();
+    var cipher = require('../../cipher');
 
     server.get('/mmapi/fu/:userid/:path', function (req, res) {
         res.send('Ok');
@@ -12,12 +13,15 @@ exports.loadWebApi = function (server) {
         var isUserLoggedIn = db.do_login(username, password);
         
         if(isUserLoggedIn){
-            res.cookie('mmu', username+';'+password);
+            res.cookie('mmu', cipher.encode(username+';'+password), { httpOnly: true });
+            res.send('/main');
+        } else {
+            res.sendStatus(404);
         }
     });
     
     server.get('/mmapi/user/logout', function(req, res){
-        res.clearCookie('mmu', {});
+        res.clearCookie('mmu', { httpOnly: true });
         res.redirect('/');
     });
 };

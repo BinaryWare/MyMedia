@@ -39,10 +39,10 @@ exports.loadWebServer = function (express, server) {
         
     // Server Filter
     server.use(function(req, res, next){
-        var umb=req.cookies.umb;
+        var umb=req.cookies.mmu;
 
         setAllHeaders(res);
-
+        
        ((umb===undefined) && (sec_routes.indexOf(req.url)!==-1))? res.redirect('/') : next();
     });
     

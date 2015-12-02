@@ -8,3 +8,56 @@
     color: black;
 }
 
+/* Loading page overlay */
+.loader {
+    opacity: 0;
+    position: fixed;
+    z-index: -99997;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    text-align: center;
+    transition: opacity 0.5s ease-in;
+}
+
+    .loader.active {
+        opacity: 1;
+        z-index: 99998;
+        background-image: url('img/load.gif');
+        background-color: lightblue;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 5px;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -25px 0 0 -25px;
+    }
+
+.back-load {
+    opacity: 0.5;
+    position: absolute;
+    z-index: 99997;
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    background-repeat: repeat;
+    top: 0;
+    left: 0;
+}
+
+.hide-obj{
+    display:none!important; 
+}
+
+.mb {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;    
+}
+
