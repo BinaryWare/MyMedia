@@ -15,7 +15,7 @@ $(document).ready(function(){
         }).done(function(dat){
             window.location = dat;
         }).fail(function(){
-            messageBox('Your password and username are wrong!', 'danger', 8000);
+            messageBox('Your password and username are wrong!', 'danger', 6000);
             finishLoading();
         });
     });

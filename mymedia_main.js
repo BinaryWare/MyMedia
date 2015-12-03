@@ -1,4 +1,4 @@
-var SERVER_PORT = 8000;
+var SERVER_PORT = 9900;
 var express = require('express');
 var server = express();
 var console = require('./modules/console');

@@ -8,15 +8,16 @@ var BROWSER_SETTINGS = {
     'center': true,
     'auto-hide-menu-bar': true,
     'resizable': true,
-    'icon':'mm_icon.png'
+    'icon':'mm_icon.png',
+    'node-integration': false
 };
 
 exports.loadAppSys = function(){
     app.on('ready', function(){
         bWinObj = new BrowserWindow(BROWSER_SETTINGS);
     
-        bWinObj.loadUrl('http://localhost:8000/');
-        bWinObj.show();    
+        bWinObj.loadUrl('http://localhost:9900/');
+        bWinObj.show();
     });
     
     app.on('window-all-closed', function() {

@@ -8,7 +8,7 @@
     <% end %>
 
     <link rel="icon" href="libs/web/img/mm_icon.png" />
-
+    
     <% include 'header_layout.ect' %>
 </head>
 <body>
@@ -16,7 +16,9 @@
         <% include 'main_menu.ect' %>
     <% end %>
     
-    <% content %>
+    <div class="container-fluid">
+        <% content %>
+    </div>
     
     <% include 'loading_layout.ect' %>
     <% include 'messagebox_layout.ect' %>
