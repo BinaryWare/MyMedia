@@ -85,6 +85,8 @@ function readDBData() {
 /**
  * @returns {undefined}
  * 
+ * @deprecated Not Used.
+ * 
  * @description Check if the DB file exists.
  */
 function checkDBFile() {
@@ -105,7 +107,7 @@ function checkDBUserExists(username) {
     var db_data = readDBData();
 
     db_data = db_data.dbu.filter(function (item) {
-        return (item.u === username_c && item.u !== DEFAULT_USER.u);
+        return (item.u === username_c);
     });
 
     return (db_data.length >= 1);
@@ -113,6 +115,38 @@ function checkDBUserExists(username) {
 
 module.exports = function () {
     var db_api = {};
+
+    /*
+     * 
+     * @param {String} username
+     * @param {String} user_field
+     * 
+     * @returns {String}
+     * 
+     * @description Gets the user and return a custom field value.
+     */
+    db_api.getUserField = function(username, user_field){
+        var field_value = '';
+        var username_c = cipher.encode(username);
+        if (!checkDBUserExists(username)) {
+            var db_data = readDBData();
+            
+            var user = db_data.dbu.filter(function(item){
+                return (item.u === username_c);
+            });
+            
+            if(user.length>=1){
+                var u = user[0];
+                field_value = u[user_field];
+                
+                if(field_value!==undefined){
+                    field_value = cipher.decode(field_value);   
+                }
+            }
+        }
+        
+        return field_value;
+    };
 
     /**
      * @param {String} username
@@ -211,9 +245,8 @@ module.exports = function () {
             db_data = db_data.dbu.filter(function (item) {
                 var isUserValid = ((item.u !== username_c) && (item.p !== password_c));
 
-                if (isUserValid) {
+                if (isUserValid) 
                     isUserDeleted = true;
-                }
 
                 return isUserValid;
             });
@@ -308,10 +341,11 @@ module.exports = function () {
      */
     db_api.get_user_perms = function(username){
         var perm = '';
+        
         if (checkDBUserExists(username)) {
             var db_data = readDBData();
             var username_c = cipher.encode(username);
-
+            
             var users = db_data.dbu.filter(function (item) {
                 return (item.u === username_c);
             });
@@ -336,6 +370,21 @@ module.exports = function () {
     db_api.getPermissionsForWeb = function(arr_perm){
         return u_perm.getPermissionsForWeb(arr_perm);
     };
-
+    
+    
+    /**
+     * @returns {int}
+     * 
+     * @description Counts how many admins the DB System has.
+     */
+    db_api.getAdminsLength = function(){
+        var db_data = readDBData();
+        var admins = db_data.dbu.filter(function(item){
+            return (cipher.decode(item.up).indexOf(user_perm.ADMIN)!==-1);
+        });
+        
+        return admins.length;
+    };
+    
     return db_api;
 };

@@ -20,6 +20,7 @@ var loadEctFile      = require('./loadFiles.js')(renderECT);
 var web_api          = require('./api_web_routes');
 var cipher           = require('../cipher');
 var db               = require('../db')();
+var user_perm        = require('../db/user_permissions/user_permssions.js');
 
 exports.loadWebServer = function (express, server) {
     //Third-party functions
@@ -62,7 +63,7 @@ exports.loadWebServer = function (express, server) {
     
     // Server API
     
-    web_api.loadWebApi(server, db, cipher);
+    web_api.loadWebApi(server, db, cipher, user_perm);
     
     /**
      * Route Web Method: GET

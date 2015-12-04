@@ -2,9 +2,9 @@
 
 <div class="well">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 col-lg-8 col-lg-offset-2">
             <div class="form-group">
-                <label for="permissions_l"></label>
+                <label for="permissions_l">User Permissions</label>
                 <ul id="permissions_l" class="list-group">
                     <% if @user_pm.isAdmin==true: %>
                         <li class="list-group-item"><span class="fa fa-users"></span> Administrator</li>
@@ -19,6 +19,32 @@
                     <% end %>
                 </ul>
             </div>
+            <div class="clearfix"></div>
         </div>
+    </div>
+    
+    <div class="row well">
+        <div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+                <label for="o_pwd">Old Password</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="fa fa-key"></span></div>
+                    <input type="password" id="o_pwd" class="form-control" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="n_pwd">New Password</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="fa fa-key"></span></div>
+                    <input type="password" id="n_pwd" class="form-control" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-primary"><span class="fa fa-edit white"></span>Change Password</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
     </div>
 </div>
