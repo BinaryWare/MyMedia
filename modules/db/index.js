@@ -1,3 +1,7 @@
+/** 
+ * @module Db
+ **/
+
 var user_perm = require('./user_permissions/user_permssions.js');
 var u_perm = require('./user_permissions');
 var cipher = require('../cipher');
@@ -276,7 +280,7 @@ module.exports = function () {
      * 
      * @description Checks the user permssions.
      */
-    exports.check_user_perm = function (username, perm) {
+    db_api.check_user_perm = function (username, perm) {
         var has_perm = false;
 
         if (checkDBUserExists(username)) {
@@ -293,6 +297,44 @@ module.exports = function () {
         }
 
         return has_perm;
+    };
+    
+    /**
+     * @param {String} username
+     *
+     * @returns {String}
+     * 
+     * @description Gets the user permissions.
+     */
+    db_api.get_user_perms = function(username){
+        var perm = '';
+        if (checkDBUserExists(username)) {
+            var db_data = readDBData();
+            var username_c = cipher.encode(username);
+
+            var users = db_data.dbu.filter(function (item) {
+                return (item.u === username_c);
+            });
+
+            if(users.length!==0){
+                perm = cipher.decode(users[0].up);
+            }
+        }
+        
+        return perm;
+    };
+    
+    /**
+     * @param {String} arr_perm
+     * 
+     * @returns {Object}
+     * 
+     * @description This function is an adaptador of function 
+     *              with the name 'getPermissionsForWeb' on 'user_permissions' 
+     *              module.
+     */
+    db_api.getPermissionsForWeb = function(arr_perm){
+        return u_perm.getPermissionsForWeb(arr_perm);
     };
 
     return db_api;

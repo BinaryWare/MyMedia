@@ -1,3 +1,7 @@
+/**
+ * @module Web
+ */
+
 var fs = require('fs');
 
 module.exports = function (renderECT) {

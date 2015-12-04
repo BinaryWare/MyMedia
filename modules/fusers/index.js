@@ -1,3 +1,7 @@
+/**
+ * @module FUsers
+ */
+
 var FUSER_DIR = 'fu';
 var fs = require('fs');
 var fs_e = require('fs-extra');

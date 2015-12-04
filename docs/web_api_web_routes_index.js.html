@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: db/user_permissions/user_permssions.js</title>
+    <title>JSDoc: Source: web/api_web_routes/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: db/user_permissions/user_permssions.js</h1>
+    <h1 class="page-title">Source: web/api_web_routes/index.js</h1>
 
     
 
@@ -27,27 +27,45 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module Db/User_Permissions
+ * @module Web/Api_Web_Routes
  */
 
 /**
- * @description Administrator permission. This permission if for the maintance
- *              of all platform. Gives the access of all areas.
+ * 
+ * @param {Object} server
+ * @param {Db} db
+ * @param {Cipher} cipher
+ * 
+ * @returns {undefined}
+ * 
+ * @description Loads all the rest api for webserver application.
  */
-exports.ADMIN = 'A';
+exports.loadWebApi = function (server, db, cipher) {
+    server.get('/mmapi/fu/:userid/:path', function (req, res) {
+        res.send('Ok');
+    });
 
-/**
- * @description User permission. This permission gives only access for uploading
- *              files, change the user crendentials and share the files for 
- *              public or private access.
- */
-exports.USER = 'U';
-
-/**
- * @description Viewer permission. This permission is only who wants to view 
- *              private shared files.
- */
-exports.VIEWER = 'U-';</code></pre>
+    server.post('/mmapi/user/login', function(req, res){
+        var body = req.body;
+        var username = body.username;
+        var password = body.password;
+        var isUserLoggedIn = db.do_login(username, password);
+        
+        if(isUserLoggedIn){
+            var userPerms = db.get_user_perms(username);
+            res.cookie('mmu', cipher.encode(username+';'+password+';'+userPerms), { httpOnly: true });
+            res.send('/main');
+        } else {
+            res.sendStatus(404);
+        }
+    });
+    
+    server.get('/mmapi/user/logout', function(req, res){
+        res.clearCookie('mmu', { httpOnly: true });
+        res.redirect('/');
+    });
+};
+</code></pre>
         </article>
     </section>
 

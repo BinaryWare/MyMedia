@@ -1,3 +1,7 @@
+/**
+ * @module App_Sys
+ */
+
 var app = require('app');
 var BrowserWindow = require('browser-window');
 var bWinObj = null;

@@ -1,7 +1,18 @@
-exports.loadWebApi = function (server) {
-    var db = require('../../db')();
-    var cipher = require('../../cipher');
+/**
+ * @module Web/Api_Web_Routes
+ */
 
+/**
+ * 
+ * @param {Object} server
+ * @param {Db} db
+ * @param {Cipher} cipher
+ * 
+ * @returns {undefined}
+ * 
+ * @description Loads all the rest api for webserver application.
+ */
+exports.loadWebApi = function (server, db, cipher) {
     server.get('/mmapi/fu/:userid/:path', function (req, res) {
         res.send('Ok');
     });
@@ -13,7 +24,8 @@ exports.loadWebApi = function (server) {
         var isUserLoggedIn = db.do_login(username, password);
         
         if(isUserLoggedIn){
-            res.cookie('mmu', cipher.encode(username+';'+password), { httpOnly: true });
+            var userPerms = db.get_user_perms(username);
+            res.cookie('mmu', cipher.encode(username+';'+password+';'+userPerms), { httpOnly: true });
             res.send('/main');
         } else {
             res.sendStatus(404);

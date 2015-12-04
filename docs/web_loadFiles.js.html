@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: db/user_permissions/user_permssions.js</title>
+    <title>JSDoc: Source: web/loadFiles.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: db/user_permissions/user_permssions.js</h1>
+    <h1 class="page-title">Source: web/loadFiles.js</h1>
 
     
 
@@ -27,27 +27,40 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module Db/User_Permissions
+ * @module Web
  */
 
-/**
- * @description Administrator permission. This permission if for the maintance
- *              of all platform. Gives the access of all areas.
- */
-exports.ADMIN = 'A';
+var fs = require('fs');
 
-/**
- * @description User permission. This permission gives only access for uploading
- *              files, change the user crendentials and share the files for 
- *              public or private access.
- */
-exports.USER = 'U';
+module.exports = function (renderECT) {
+    var r_api = {};
+    var rEct = renderECT;
+    
+    function checkFile(route_name) {
+        var res = true;
+        try {
+            fs.readFileSync('www/pages/' + route_name + '.ect');
+        } catch (ex) {
+            res = false;
+        }
+        return res;
+    }
+    
+    r_api.render = function (res, route_name, data) {
+        if (data === null || data === undefined)
+            data = {};
 
-/**
- * @description Viewer permission. This permission is only who wants to view 
- *              private shared files.
- */
-exports.VIEWER = 'U-';</code></pre>
+        var html = '';
+        if(!checkFile(route_name))
+            route_name = 'page_not_found';
+        
+        html = rEct.render(route_name + '.ect', data);    
+        
+        res.send(html);
+    };
+    
+    return r_api;
+};</code></pre>
         </article>
     </section>
 

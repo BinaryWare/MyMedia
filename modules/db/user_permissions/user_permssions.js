@@ -1,4 +1,8 @@
 /**
+ * @module Db/User_Permissions
+ */
+
+/**
  * @description Administrator permission. This permission if for the maintance
  *              of all platform. Gives the access of all areas.
  */

@@ -1,3 +1,7 @@
+/**
+ * @module Cipher
+ */
+
 var crypto    = require('crypto');
 var algorithm = 'aes-256-cbc';
 var key       = 'My#m3D1@ !2015#!c';

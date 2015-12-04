@@ -14,11 +14,17 @@
 <body>
     <% if @isUserLogged!=undefined: %>
         <% include 'main_menu.ect' %>
+        
+        <div class="content">
     <% end %>
     
     <div class="container-fluid">
         <% content %>
     </div>
+    
+    <% if @isUserLogged!=undefined: %>
+        </div>
+    <% end %>
     
     <% include 'loading_layout.ect' %>
     <% include 'messagebox_layout.ect' %>

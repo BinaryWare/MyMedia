@@ -1,3 +1,7 @@
+/**
+ * @module Console
+ */
+
 var colors = require('colors');
 
 /**
