@@ -64,6 +64,23 @@ function messageBox(msg, message_type, time){
     }, time);
 }
 
+function open_confirm(msg, title, confirm_btn_msg, cancel_btn_msg, confirm_callback, close_callback){
+    $('#c_modal_title').html(title);
+    $('#c_modal_body').html(msg);
+    
+    $('#c_confirm_btn').html(confirm_btn_msg);
+    $('#c_close_btn').html(cancel_btn_msg);
+    
+    $('#c_confirm_btn').on('click', confirm_callback);
+    $('#c_close_btn').on('click', close_callback);
+    
+    $('#confirm_modal').modal('show');
+}
+
+function close_confirm(){
+    $('#confirm_modal').modal('hide');
+}
+
 $(document).ready(function(){
     $('#msg_e').hide();
     

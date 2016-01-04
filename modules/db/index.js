@@ -12,7 +12,7 @@ var DB_FILE = 'local.dbj';
 var DEFAULT_USER_PERM = [user_perm.ADMIN, user_perm.USER, user_perm.VIEWER];
 var DEFAULT_USER = {
     u: cipher.encode('admin'),
-    p: cipher.encode('myM3D1@localadmin.loc'),
+    p: cipher.encode('myM3D1@dmin'),
     up: cipher.encode(DEFAULT_USER_PERM.toString())
 };
 var DEFAULT_DB_STRUCT = {

@@ -1,6 +1,28 @@
 <div class="alert mb" role="alert" id="msg_e" onclick="closeMessageBox()" style="cursor: pointer;">
     <button type="button" class="close" id="mb_close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     &nbsp;
-  <strong id="mb_msg"></strong>
+    <strong id="mb_msg"></strong>
 </div>
 
+<div class="modal" id="confirm_modal" tabindex="-1" role="dialog" aria-labelledby="c_modal_title">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title" id="c_modal_title"></h4>
+      </div>
+        
+      <div class="modal-body" id="c_modal_body"></div>
+      
+      <div class="modal-footer">
+          <div class="pull-right">
+            <button type="button" class="btn btn-default" id="c_close_btn"></button>
+          </div>
+          
+          <div class="pull-left">
+            <button type="button" class="btn btn-primary" id="c_confirm_btn"></button>
+          </div>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
