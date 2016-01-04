@@ -17,13 +17,13 @@ $(document).ready(function(){
                     $('#n_pwd').val('');
                 },
                 500: function(){
-                    messageBox('', 'danger');
+                    messageBox('Check if the password field is not empty or it has at least 5 characters!', 'danger');
                 },
                 201: function(){
-                    messageBox('', 'danger');
+                    messageBox('Cannot change password, try later or contact the administrator!', 'danger');
                 },
                 404: function(){
-                    messageBox('', 'danger');
+                    messageBox('The old password is not valid, enter the valid password please!', 'danger');
                 }
             }
         }).done(function(){

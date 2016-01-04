@@ -15,7 +15,6 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
 
     function isAdminUser(cookie) {
         var mmu_perm_arr = getCookieField(cookie, 2).split(',');
-
         return (mmu_perm_arr.indexOf(user_perm.ADMIN)!==-1);
     }
     
