@@ -31,7 +31,7 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
     server.get('/mmapi/fu/:userid/:path', function (req, res) {
         res.send('Ok');
     });
-
+    
     server.post('/mmapi/user/login', function(req, res){
         var body = req.body;
         var username = body.username;
@@ -102,5 +102,36 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
         }
         
         res.sendStatus(response);
+    });
+    
+    server.get('/mmapi/users/list', function (req, res) {
+        var cookies = req.cookies;
+        var isAdmin = isAdminUser(cookies);
+        
+        if(isAdmin){
+            var c_user = getCookieField(cookies, 0); 
+            var user_l = db.getUsersList();
+            var user_list = [];
+            
+            if((user_list.length-1) !== 0){
+                user_list = user_list.map(function(u){
+                    var user = u;
+                
+                    user.u = cipher.decode(u.u);
+                    if(user.u !== c_user){
+                        user.p = '*******************';
+                        user.up = cipher.decode(u.up);
+                    
+                        return user;
+                    }
+                });
+            }
+            user_list = JSON.stringify({ users: user_list });
+            
+            db.refreshDBData();
+            res.send(user_list);
+        }else{
+            res.sendStatus(403);
+        }
     });
 };

@@ -72,3 +72,17 @@
 .black-border{
     border: 1px solid black;
 }
+
+thead,tfoot{
+    background-color: steelblue; 
+    color: white;
+}
+
+.tr-row{
+    background-color: lightgray !important;
+}
+
+.tr-row:hover{
+    background-color: lightslategrey !important;
+    color:white!important;
+}

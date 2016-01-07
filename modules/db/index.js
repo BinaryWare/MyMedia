@@ -67,7 +67,7 @@ function readDBFile() {
  */
 function readDBData() {
     var db_res = mem.getMemDB();
-
+    
     if (db_res === null) {
         try {
             db_res = JSON.parse(readDBFile());
@@ -80,6 +80,18 @@ function readDBData() {
     }
     
     return db_res;
+}
+
+/**
+ * @returns {undefined}
+ * @description Refresh DB system.
+ */
+function refreshDBData(){
+    try{
+        mem.setMemDB(JSON.parse(readDBFile()));    
+    }catch(ex){
+        mem.setMemDB(DEFAULT_DB_STRUCT);
+    }
 }
 
 /**
@@ -385,6 +397,20 @@ module.exports = function () {
         
         return admins.length;
     };
+    
+    
+    /**
+     * @returns {Object[]}
+     * 
+     * @description Gets all the users.
+     */
+    db_api.getUsersList = function(){
+        var db_data = readDBData();
+        return db_data.dbu;
+    };
+    
+    
+    db_api.refreshDBData = refreshDBData;
     
     return db_api;
 };

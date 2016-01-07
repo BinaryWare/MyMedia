@@ -8,7 +8,7 @@ var bWinObj = null;
 var BROWSER_SETTINGS = {
     'width': 800,
     'height': 600,
-    'show': false,
+    'show': true,
     'center': true,
     'auto-hide-menu-bar': true,
     'resizable': true,

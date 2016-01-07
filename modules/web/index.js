@@ -6,7 +6,7 @@ var KEY_COOKIE       = 'my#M3d1@!#!2015!';
 var ECT              = require('ect');
 var body_parser      = require('body-parser');
 var cookie_parser    = require('cookie-parser');
-var sec_routes       = ['/main', '/settings', '/mmapi/user/logout', '/mmapi/user/cpwd'];
+var sec_routes       = ['/main', '/settings', '/mmapi/user/logout', '/mmapi/user/cpwd', '/user_manager'];
 var HEADERS_SETTINGS = {
                         'X-Frame-Options': 'deny',
                         'X-XSS-Protection': '1; mode=block',
@@ -87,7 +87,6 @@ exports.loadWebServer = function (express, server) {
      * Description: Shows the web page file (Depends on the page parameter)
      **/
     server.get('/:page', function (req, res) {
-        var pt = req.query.pt;
         var page = req.params.page;
         var cookies = req.cookies;
         var mmu = cookies.mmu;
@@ -102,10 +101,6 @@ exports.loadWebServer = function (express, server) {
             data.isUserLogged = true;
             data.username = dec_mmu_user;
             data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);
-        }
-        
-        if(pt!==undefined){
-            
         }
         
         loadEctFile.render(res, page, data);
