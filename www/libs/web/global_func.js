@@ -25,20 +25,21 @@ function finishLoading() {
 
 function closeMessageBox(message_type){
     if(message_type===undefined){
-        var msg_class = $('#msg_e').attr('class');
+        var msg_class = document.getElementById('msg_e').className;
         var class_array = msg_class.split(' ');
         
         for(var c=0;c<class_array.length;c++){
             var item = class_array[c];
             if(item.indexOf('alert-')!==-1){
-                message_type = item;
+                message_type = ' '+item;
                 break;
             }
         }
     }
     
     $('#msg_e').fadeOut(500, function(){
-        $('#msg_e').removeClass(message_type);
+        document.getElementById('msg_e').className = document.getElementById('msg_e').className.replace(new RegExp(message_type, 'g'), '');
+        
         clearTimeout(hideNotification);
         hideNotification=null;
     });
@@ -50,8 +51,8 @@ function messageBox(msg, message_type, time){
     else
         message_type = 'alert-'+message_type;
     
-    $('#msg_e').addClass(message_type);
-    $('#mb_msg').html(msg);
+    document.getElementById('msg_e').className += ' '+message_type;
+    document.getElementById('mb_msg').innerHTML = msg;
     
     if(time===undefined)
         time = 5000;
@@ -65,14 +66,26 @@ function messageBox(msg, message_type, time){
 }
 
 function open_confirm(msg, title, confirm_btn_msg, cancel_btn_msg, confirm_callback, close_callback){
-    $('#c_modal_title').html(title);
-    $('#c_modal_body').html(msg);
+    document.getElementById('c_modal_title').innerHTML = title;
+    document.getElementById('c_modal_body').innerHTML = msg;
+            
+    document.getElementById('c_confirm_btn').innerHTML = confirm_btn_msg;
+    document.getElementById('c_close_btn').innerHTML = cancel_btn_msg;
+
+    if(close_callback === undefined){
+        close_callback = function(){
+            $('#confirm_modal').modal('hide');
+        };
+    }
     
-    $('#c_confirm_btn').html(confirm_btn_msg);
-    $('#c_close_btn').html(cancel_btn_msg);
+    if(confirm_callback === undefined){
+        confirm_callback = function(){
+            $('#confirm_modal').modal('hide');
+        };
+    }
     
-    $('#c_confirm_btn').on('click', confirm_callback);
-    $('#c_close_btn').on('click', close_callback);
+    document.getElementById('c_confirm_btn').onclick = confirm_callback;
+    document.getElementById('c_close_btn').onclick = close_callback;
     
     $('#confirm_modal').modal('show');
 }

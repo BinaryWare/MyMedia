@@ -104,17 +104,40 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
         res.sendStatus(response);
     });
     
+    server.post('/mmapi/user/add', function(req, res){
+        var response = 200;
+        var body = req.body;
+        var cookies = req.cookies;
+        var isAdmin = isAdminUser(cookies);
+        
+        if(isAdmin){
+            var user = body.u;
+            var pass = body.p;
+            var uperm = body.up;
+            
+            var is_admin  = (uperm.indexOf(user_perm.ADMIN)!==-1);
+            var is_user   = (uperm.indexOf(user_perm.USER)!==-1);
+            var is_viewer = (uperm.indexOf(user_perm.VIEWER)!==-1);
+                    
+            if(!db.add_user(user, pass, is_admin, is_user, is_viewer))
+                response = 500;
+        }else{
+            response = 403;
+        }
+        
+        res.sendStatus(response);
+    });
+    
     server.get('/mmapi/users/list', function (req, res) {
         var cookies = req.cookies;
         var isAdmin = isAdminUser(cookies);
         
         if(isAdmin){
             var c_user = getCookieField(cookies, 0); 
-            var user_l = db.getUsersList();
-            var user_list = [];
+            var user_list = db.getUsersList();
             
             if((user_list.length-1) !== 0){
-                user_list = user_list.map(function(u){
+                user_list = user_list.filter(function(u){
                     var user = u;
                 
                     user.u = cipher.decode(u.u);
@@ -125,7 +148,10 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
                         return user;
                     }
                 });
+            } else {
+                user_list = [];
             }
+            
             user_list = JSON.stringify({ users: user_list });
             
             db.refreshDBData();

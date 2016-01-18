@@ -3,14 +3,38 @@ var user_page_index = 0;
 var user_max_items = 6;
 var user_list_temp = [];
 
+function getUserPerm(uperm) {
+    var user_perm = uperm.split(',');
+    var html_user_perm = '';
+    if (user_perm.length !== 0) {
+        if (user_perm.indexOf('A') !== -1)
+            html_user_perm += '<span class="fa fa-users"></span> ';
+
+        if (user_perm.indexOf('U') !== -1)
+            html_user_perm += '<span class="fa fa-user"></span> ';
+
+        if (user_perm.indexOf('U-') !== -1)
+            html_user_perm += '<span class="fa fa-user-secret"></span>';
+    }else{
+        html_user_perm += '<strong>No Permissions</strong>';
+    }
+    return html_user_perm;
+}
+
 function loadUserMListTable(callback, page_number) {
     var html_users = '';
     if (page_number === undefined)
         page_number = 0;
     else
         user_page_index = page_number;
+    
+    if(user_list === null)
+        user_list = [];
 
     if (user_list.length !== 0) {
+        $('#um_previous').removeClass('disabled');
+        $('#um_next').removeClass('disabled');
+        
         var user_start_index = (user_page_index * user_max_items);
         var user_end_index = user_start_index + 5;
         var counter = user_end_index;
@@ -19,12 +43,16 @@ function loadUserMListTable(callback, page_number) {
         for (var c = 0; c < 5; c++) {
             var user = user_list_temp[c];
             if (user !== undefined && user !== null) {
-                html_users += '<tr class="tr-row" data-index="' + (counter) + '"> <td>' + user.u + '</td> <td>' + user.up + '</td> <td></td> </tr>';
+                var html_user_perm = getUserPerm(user.up);
+                html_users += '<tr class="tr-row" data-index="' + (c) + '"> <td>' + user.u + '</td> <td>' + html_user_perm + '</td> <td> <button data-index="'+ (c) +'" onclick="deleteUser(this);" class="btn btn-danger"><span class="fa fa-times"></span></button> </td> </tr>';
                 counter++;
             }
         }
     }else{
         html_users = '<tr class="tr-row"> <td colspan="3"><strong>There is no users to show</strong></td> </tr>';
+        
+        $('#um_previous').addClass('disabled');
+        $('#um_next').addClass('disabled');
     }
     
     $('#um_list').html(html_users);
@@ -40,10 +68,10 @@ function loadUserMList(){
         dataType: 'json',
         type: 'GET'
     }).done(function(user_l){
-        if(user_list===null)
-            user_list = user_l.users;    
+        user_list = user_l.users;    
         
         loadUserMListTable(function(){
+            messageBox('User list loaded successfully!', 'success');
             finishLoading();
         });
     }).fail(function(){
@@ -52,6 +80,108 @@ function loadUserMList(){
     });
 }
 
+function clearAddUserFields(){
+    $('#add_user_username').val('');
+    $('#add_user_password').val('');
+    $('#add_user_c_password').val('');
+    
+    $('#add_user_is_admin').prop('checked', false);
+    $('#add_user_is_user').prop('checked', false);
+    $('#add_user_is_viewer').prop('checked', false);
+}
+
+function deleteUser(item){
+    open_confirm('Are you shure you want delete this user?', 'Delete Account', 'Delete', 'Cancel', function(){
+        startLoading();
+        
+        var data_id = $(item).attr('data-index');
+        var username = user_list_temp[data_id].u;
+                
+        $.ajax({
+            url:'/mmapi/user/delete/'+username,
+            type: 'POST',
+            data: {},
+            statusCode: {
+                200:function(){
+                    messageBox('User deleted successfully!', 'success');
+                    $('#um_table_refresh').click();
+                    close_confirm();
+                },
+                500:function(){
+                    messageBox('Cannot delete the user '+username+'!', 'danger');
+                }
+            }
+        }).done(function(){
+            finishLoading();
+        }).fail(function(){
+            finishLoading();
+        });   
+    });
+}
+
 $(document).ready(function(){
     loadUserMList();
+    
+    $('#um_table_refresh').on('click', function(){
+        loadUserMList(); 
+    });
+    
+    $('#um_add_user').on('click', function(){
+        $('#um_add_user_modal_modal').modal('show');
+    });
+    
+    $('#btn_add_user_close_btn').on('click', function(){
+        $('#um_add_user_modal_modal').modal('hide');
+        clearAddUserFields();
+    });
+    
+    $('#btn_add_user_confirm_btn').on('click', function(){
+        startLoading();
+        var user_perm = [];
+        var username = $('#add_user_username').val();
+        var password = $('#add_user_password').val();
+        var c_password = $('#add_user_c_password').val();
+        
+        if(c_password===password){
+            if ($('#add_user_is_admin').prop('checked'))
+                user_perm.push('A');
+
+            if ($('#add_user_is_user').prop('checked'))
+                user_perm.push('U');
+
+            if ($('#add_user_is_viewer').prop('checked'))
+                user_perm.push('U-');
+
+            $.ajax({
+                url: '/mmapi/user/add',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    u: username,
+                    p: password,
+                    up: user_perm.toString()
+                }),
+                statusCode: {
+                    200: function () {
+                        $('#btn_add_user_close_btn').click();
+                        messageBox('User created successfully!', 'success');
+                        $('#um_table_refresh').click();
+                    },
+                    403: function () {
+                        messageBox('You don\'t have permissions to do this operation!', 'danger');
+                    },
+                    500: function () {
+                        messageBox('This user ' + username + ' is already exists!', 'danger');
+                    }
+                }
+            }).done(function () {
+                finishLoading();
+            }).fail(function () {
+                finishLoading();
+            });
+        } else {
+            messageBox('The password you entered does not match the password you confirmed!', 'danger');
+            finishLoading();
+        }
+    });
 });

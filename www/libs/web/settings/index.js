@@ -28,6 +28,8 @@ $(document).ready(function(){
             }
         }).done(function(){
             finishLoading();
+        }).fail(function(){
+            finishLoading();
         });
     });
     
