@@ -128,6 +128,26 @@ exports.loadWebApi = function (server, db, cipher, user_perm) {
         res.sendStatus(response);
     });
     
+    server.post('/mmapi/user/edit', function(req, res){
+        var response = 200;
+        var body = req.body;
+        var cookies = req.cookies;
+        var isAdmin = isAdminUser(cookies);
+        
+        if(isAdmin){
+            var user = body.u;
+            var pass = body.p;
+            var uperm = body.up;
+            
+            if(!db.edit_user_with_admin(user, pass, uperm))
+                response = 500;
+        }else{
+            response = 403;
+        }
+        
+        res.sendStatus(response);
+    });
+    
     server.get('/mmapi/users/list', function (req, res) {
         var cookies = req.cookies;
         var isAdmin = isAdminUser(cookies);

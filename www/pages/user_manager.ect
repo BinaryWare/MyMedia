@@ -133,4 +133,75 @@
 </div>
 <!-- Add User Modal END -->
 
+<!-- Edit User Modal BEGIN -->
+<div class="modal" id="um_edit_user_modal_modal" tabindex="-1" role="dialog" aria-labelledby="edit_user_modal_title">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="edit_user_modal_title"><span class="fa fa-edit"></span> Edit User</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Username</span>
+                                <input type="text" class="form-control" id="edit_user_username" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Password</span>
+                                <input type="password" class="form-control" id="edit_user_password" onclick="this.value=''; this.focus();">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="edit_user_is_admin" type="checkbox"> <span class="fa fa-users"></span> Is Admin
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input id="edit_user_is_user" type="checkbox"> <span class="fa fa-user"></span> Is User
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input id="edit_user_is_viewer" type="checkbox"> <span class="fa fa-user-secret"></span> Is Viewer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btn_edit_user_close_btn"><span class="fa fa-times"></span> Cancel</button>
+                </div>
+
+                <div class="pull-left">
+                    <button type="button" class="btn btn-primary" id="btn_edit_user_confirm_btn"><span class="fa fa-plus"></span> Edit User</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add User Modal END -->
+
 <script src="libs/web/user_manager/index.js" type="text/javascript"></script>

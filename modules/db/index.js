@@ -315,6 +315,53 @@ module.exports = function () {
 
         return isUserReg;
     };
+    
+    /**
+     * 
+     * @param {String} username
+     * @param {String} password
+     * @param {String} permissions
+     * 
+     * @returns {boolean}
+     * 
+     * @description Changes any user info if the user exists!
+     */
+    db_api.edit_user_with_admin = function (username, password, permissions) {
+        var isUserReg = false;
+
+        if (checkDBUserExists(username)) {
+            var permission_c = cipher.encode(permissions);
+            var password_c = cipher.encode(password);
+            var username_c = cipher.encode(username);
+
+            var db_data = readDBData();
+            var c = 0;
+            var fc = -1;
+
+            db_data.dbu.filter(function (item) {
+                var isValidUser = ((item.u === username_c));
+                if (isValidUser) {
+                    fc = c;
+                }
+                c++;
+
+                return isValidUser;
+            });
+
+            if (fc !== -1) {
+                var default_hidden_pass = cipher.encode('*******************');
+                if(password_c !== default_hidden_pass)
+                    db_data.dbu[fc].p = password_c;    
+                
+                db_data.dbu[fc].up = permission_c;
+                writeDBFile(db_data);
+
+                isUserReg = true;
+            }
+        }
+
+        return isUserReg;
+    };
 
     /**
      * 

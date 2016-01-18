@@ -44,7 +44,18 @@ function loadUserMListTable(callback, page_number) {
             var user = user_list_temp[c];
             if (user !== undefined && user !== null) {
                 var html_user_perm = getUserPerm(user.up);
-                html_users += '<tr class="tr-row" data-index="' + (c) + '"> <td>' + user.u + '</td> <td>' + html_user_perm + '</td> <td> <button data-index="'+ (c) +'" onclick="deleteUser(this);" class="btn btn-danger"><span class="fa fa-times"></span></button> </td> </tr>';
+                
+                html_users += '<tr class="tr-row" data-index="' + (c) + '">';
+                
+                html_users += '<td>' + user.u + '</td>';
+                html_users += '<td>' + html_user_perm + '</td>';
+                html_users += '<td>';
+                html_users += '<button data-index="'+ (c) +'" onclick="deleteUser(this);" class="btn btn-danger"><span class="fa fa-times"></span></button> ';
+                html_users += '<button data-index="'+ (c) +'" onclick="editUser(this);" class="btn btn-primary"><span class="fa fa-edit"></span></button>';
+                html_users += '</td>';
+                
+                html_users += '</tr>';
+                
                 counter++;
             }
         }
@@ -119,6 +130,21 @@ function deleteUser(item){
     });
 }
 
+function editUser(item){
+    var data_id = $(item).attr('data-index');
+    var user = user_list_temp[data_id];
+    var uperm = user.up;
+    
+    $('#edit_user_username').val(user.u);
+    $('#edit_user_password').val(user.p);
+    
+    $('#edit_user_is_admin').prop('checked', (uperm.indexOf('A')!==-1));
+    $('#edit_user_is_user').prop('checked', (uperm.indexOf('U')!==-1));
+    $('#edit_user_is_viewer').prop('checked', (uperm.indexOf('U-')!==-1));
+    
+    $('#um_edit_user_modal_modal').modal('show');
+}
+
 $(document).ready(function(){
     loadUserMList();
     
@@ -142,7 +168,13 @@ $(document).ready(function(){
         var password = $('#add_user_password').val();
         var c_password = $('#add_user_c_password').val();
         
-        if(c_password===password){
+        if(username==='' || username===' ' || username.indexOf(' ')!==-1){
+            messageBox('Invalid username!', 'danger');
+            finishLoading();
+        }else if(password==='' || password===' ' || password.length>=4){
+            messageBox('Invalid password! You must have at least 4 characters without spaces!', 'danger');
+            finishLoading();
+        }else if(c_password===password){
             if ($('#add_user_is_admin').prop('checked'))
                 user_perm.push('A');
 
@@ -182,6 +214,61 @@ $(document).ready(function(){
         } else {
             messageBox('The password you entered does not match the password you confirmed!', 'danger');
             finishLoading();
+        }
+    });
+    
+    $('#btn_edit_user_close_btn').on('click', function(){
+        $('#um_edit_user_modal_modal').modal('hide');    
+    });
+    
+    $('#btn_edit_user_confirm_btn').on('click', function () {
+        startLoading();
+        var user_perm = [];
+        var username = $('#edit_user_username').val();
+        var password = $('#edit_user_password').val();
+        
+        if (password === '' || password === ' ' || password.length >= 4) {
+            messageBox('Invalid password! You must have at least 4 characters without spaces!', 'danger');
+            finishLoading();
+        } else {
+            if ($('#edit_user_is_admin').prop('checked'))
+                user_perm.push('A');
+
+            if ($('#edit_user_is_user').prop('checked'))
+                user_perm.push('U');
+
+            if ($('#edit_user_is_viewer').prop('checked'))
+                user_perm.push('U-');
+
+            $.ajax({
+                url: '/mmapi/user/edit',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    u: username,
+                    p: password,
+                    up: user_perm.toString()
+                }),
+                statusCode: {
+                    200: function () {
+                        messageBox('User edited successfully!', 'success');
+                        $('#btn_edit_user_close_btn').click();
+                        $('#um_table_refresh').click();
+                    },
+                    403: function () {
+                        messageBox('You don\'t have permissions to do this operation!', 'danger');
+                    },
+                    500: function () {
+                        messageBox('This user ' + username + ' doesn\'t exists!', 'danger');
+                        $('#btn_edit_user_close_btn').click();
+                        $('#um_table_refresh').click();
+                    }
+                }
+            }).done(function () {
+                finishLoading();
+            }).fail(function () {
+                finishLoading();
+            });
         }
     });
 });
