@@ -6,7 +6,18 @@ var KEY_COOKIE       = 'my#M3d1@!#!2015!';
 var ECT              = require('ect');
 var body_parser      = require('body-parser');
 var cookie_parser    = require('cookie-parser');
-var sec_routes       = ['/main', '/settings', '/mmapi/user/logout', '/mmapi/user/cpwd', '/user_manager'];
+var sec_routes       = [
+                            '/main', 
+                            '/settings', 
+                            '/mmapi/user/logout', 
+                            '/mmapi/user/cpwd', 
+                            '/user_manager', 
+                            '/mmapi/user/add', 
+                            '/mmapi/user/cpwd', 
+                            '/mmapi/user/edit',
+                            '/mmapi/users/list',
+                            '/mmapi/stats/get'  
+                        ];
 var HEADERS_SETTINGS = {
                         'X-Frame-Options': 'deny',
                         'X-XSS-Protection': '1; mode=block',

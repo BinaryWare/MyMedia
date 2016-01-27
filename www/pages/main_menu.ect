@@ -10,7 +10,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-mm-menu">
-            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav">
+                <% if @user_pm.isAdmin==true: %>
+                    <li><a href="/stats">Statistics</a></li>
+                <% end %>
+                
+                <li><a href="/user_files">Files</a></li>
+            </ul>
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
