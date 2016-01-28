@@ -227,7 +227,7 @@ $(document).ready(function(){
         var username = $('#edit_user_username').val();
         var password = $('#edit_user_password').val();
         
-        if (password === '' || password === ' ' || password.length >= 4) {
+        if (password === '' || password === ' ' || password.length <= 3) {
             messageBox('Invalid password! You must have at least 4 characters without spaces!', 'danger');
             finishLoading();
         } else {
@@ -251,7 +251,7 @@ $(document).ready(function(){
                 }),
                 statusCode: {
                     200: function () {
-                        messageBox('User edited successfully!', 'success');
+                        messageBox('User edited successfully!');
                         $('#btn_edit_user_close_btn').click();
                         $('#um_table_refresh').click();
                     },
