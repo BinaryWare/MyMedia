@@ -20,14 +20,11 @@ exports.loadWebApi = function (server) {
     var edit_user = require('./routes/edit_user');
     var list_users = require('./routes/list_user');
     var statistics = require('./routes/statistics_get');
+    var user_files = require('./routes/user_files');
     
-    /**
-     * Get user's file route. (In Construction)
-     */
-    server.get('/mmapi/fu/:userid/:path', function (req, res) {
-        res.send('Ok');
-    });
-    
+    server.get('/mmapi/fu/get/preview', user_files.getUserFileForPreview);
+    server.post('/mmapi/fu/get/file', user_files.getUserFile);
+    server.post('/mmapi/fu/get/dir', user_files.getUserFolder);
     server.post('/mmapi/user/login', login.doLogin);
     server.get('/mmapi/user/logout', logout.doLogout);
     server.post('/mmapi/user/delete/:username', del_user.deleteUser);

@@ -70,10 +70,21 @@ function formatUserDir(user_id, path) {
  */
 function readDir(user_id, path) {
     var res = null;
-
+    
     try {
-        res = fs.readDirSync(formatUserDir(user_id, path));
+        var user_path = formatUserDir(user_id, path);
+        res = fs.readdirSync(user_path);
+        
+        res = res.map(function(fitem){
+            var item = {
+                isFile: fs.lstatSync(user_path+fitem).isFile(),
+                name:fitem
+            };
+            
+            return item;
+        });
     } catch (ex) {
+        fs.mkdirSync(formatUserDir(user_id, ''));
         res = [];
     }
 

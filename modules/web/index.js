@@ -19,7 +19,7 @@ var sec_routes       = [
                             '/mmapi/stats/get'  
                         ];
 var HEADERS_SETTINGS = {
-                        'X-Frame-Options': 'deny',
+                        'X-Frame-Options': 'SAMEORIGIN',
                         'X-XSS-Protection': '1; mode=block',
                         'X-Content-Type-Options': 'nosniff'
                        };
