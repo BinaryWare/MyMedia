@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: web/api_web_routes/routes/list_user/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,64 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: web/api_web_routes/routes/list_user/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var ROOT_PATH   = '../../../../';
+var db          = require(ROOT_PATH+'db')();
+var cipher      = require(ROOT_PATH+'cipher');
+var global_func = require('../../global_functions');
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description List all users. (Only administrator permissions)
+ */
+exports.listUsers = function (req, res) {
+    var cookies = req.cookies;
+    var isAdmin = global_func.isAdminUser(cookies);
 
-    <h3> </h3>
+    if (isAdmin) {
+        var c_user = global_func.getCookieField(cookies, 0);
+        var user_list = db.getUsersList();
 
+        if ((user_list.length - 1) !== 0) {
+            user_list = user_list.filter(function (u) {
+                var user = u;
 
+                user.u = cipher.decode(u.u);
+                if (user.u !== c_user) {
+                    user.p = '*******************';
+                    user.up = cipher.decode(u.up);
 
+                    return user;
+                }
+            });
+        } else {
+            user_list = [];
+        }
 
+        user_list = JSON.stringify({users: user_list});
 
+        db.refreshDBData();
+        res.send(user_list);
+    } else {
+        res.sendStatus(403);
+    }
+};
 
-
-
-
-
-    
-
-
-
-
-
+</code></pre>
+        </article>
+    </section>
 
 
 

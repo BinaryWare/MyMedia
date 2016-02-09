@@ -4,6 +4,14 @@ var db          = require(ROOT_PATH+'db')();
 var cipher      = require(ROOT_PATH+'cipher');
 var global_func = require('../../global_functions');
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description Statisctics of all user, viewers and administrators. (Only administrator permissions)
+ */
 exports.getAllStats = function (req, res) {
     var cookies = req.cookies;
     var isAdmin = global_func.isAdminUser(cookies);

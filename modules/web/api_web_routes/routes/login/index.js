@@ -2,6 +2,14 @@ var ROOT_PATH  = '../../../../';
 var cipher     = require(ROOT_PATH+'cipher');
 var db         = require(ROOT_PATH+'db')();
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description Login user session function.
+ */
 exports.doLogin = function (req, res) {
     var body = req.body;
     var username = body.username;

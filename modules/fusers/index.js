@@ -128,13 +128,14 @@ module.exports = function () {
      * @param {String} path
      * @param {String} filename
      * @param {String} file_data
+     * @param {function} callback
      * 
      * @returns {undefined}
      * 
      * @description Creates a file with all the data.
      */
-    fuser_api.writeUserFile = function (user_id, path, filename, file_data) {
-        fs.writeFileSync(formatUserDir(user_id, path) + checkdirPattern(filename), file_data);
+    fuser_api.writeUserFile = function (user_id, path, filename, file_data, callback) {
+        fs.writeFile(formatUserDir(user_id, path) + checkdirPattern(filename), file_data, callback);
     };
 
     /**

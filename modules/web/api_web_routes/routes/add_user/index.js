@@ -3,6 +3,14 @@ var user_perm   = require(ROOT_PATH+'db/user_permissions/user_permssions.js');
 var db          = require(ROOT_PATH+'db')();
 var global_func = require('../../global_functions');
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description Adds a new user with permissions.
+ */
 exports.addNewUser = function (req, res) {
     var response = 200;
     var body     = req.body;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: web/api_web_routes/routes/login/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: web/api_web_routes/routes/login/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var ROOT_PATH  = '../../../../';
+var cipher     = require(ROOT_PATH+'cipher');
+var db         = require(ROOT_PATH+'db')();
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description Login user session function.
+ */
+exports.doLogin = function (req, res) {
+    var body = req.body;
+    var username = body.username;
+    var password = body.password;
+    var isUserLoggedIn = db.do_login(username, password);
 
-    <h3> </h3>
+    if (isUserLoggedIn) {
+        var userPerms = db.get_user_perms(username);
+        res.cookie('mmu', cipher.encode(username + ';' + password + ';' + userPerms), {httpOnly: true});
+        res.send('/main');
+    } else {
+        res.sendStatus(404);
+    }
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+</code></pre>
+        </article>
+    </section>
 
 
 

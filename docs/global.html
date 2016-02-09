@@ -94,196 +94,6 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="ADMIN"><span class="type-signature"></span>ADMIN<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Administrator permission. This permission if for the maintance             of all platform. Gives the access of all areas.
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_user_permissions_user_permssions.js.html">db/user_permissions/user_permssions.js</a>, <a href="db_user_permissions_user_permssions.js.html#line5">line 5</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="USER"><span class="type-signature"></span>USER<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    User permission. This permission gives only access for uploading             files, change the user crendentials and share the files for              public or private access.
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_user_permissions_user_permssions.js.html">db/user_permissions/user_permssions.js</a>, <a href="db_user_permissions_user_permssions.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="VIEWER"><span class="type-signature"></span>VIEWER<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Viewer permission. This permission is only who wants to view              private shared files.
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_user_permissions_user_permssions.js.html">db/user_permissions/user_permssions.js</a>, <a href="db_user_permissions_user_permssions.js.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -293,14 +103,14 @@
 
     
 
-    <h4 class="name" id="checkdirPattern"><span class="type-signature"></span>checkdirPattern<span class="signature">(dir)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="addNewUser"><span class="type-signature"></span>addNewUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Checks the directory pattern.
+    Adds a new user with permissions.
 </div>
 
 
@@ -336,13 +146,36 @@
 
         <tr>
             
-                <td class="name"><code>dir</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
 
 
             
@@ -393,107 +226,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fusers_index.js.html">fusers/index.js</a>, <a href="fusers_index.js.html#line29">line 29</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="checkNativeFolder"><span class="type-signature"></span>checkNativeFolder<span class="signature">()</span><span class="type-signature"> &rarr; {undefined}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Checks if the native folder exists.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fusers_index.js.html">fusers/index.js</a>, <a href="fusers_index.js.html#line11">line 11</a>
+        <a href="web_api_web_routes_routes_add_user_index.js.html">web/api_web_routes/routes/add_user/index.js</a>, <a href="web_api_web_routes_routes_add_user_index.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -542,11 +275,15 @@
 
     
 
-    <h4 class="name" id="checkUserPerm"><span class="type-signature"></span>checkUserPerm<span class="signature">(userobj, user_perm)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="addUserFile"><span class="type-signature"></span>addUserFile<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
+
+<div class="description">
+    Adds an user file in path.
+</div>
 
 
 
@@ -581,7 +318,7 @@
 
         <tr>
             
-                <td class="name"><code>userobj</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
@@ -604,13 +341,13 @@
 
         <tr>
             
-                <td class="name"><code>user_perm</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">User_permissions</span>
+<span class="param-type">Object</span>
 
 
             
@@ -661,305 +398,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_user_permissions_index.js.html">db/user_permissions/index.js</a>, <a href="db_user_permissions_index.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="decode"><span class="type-signature"></span>decode<span class="signature">(data)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Decodes all the cipher encryption into data.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cipher_index.js.html">cipher/index.js</a>, <a href="cipher_index.js.html#line33">line 33</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="deleteDir"><span class="type-signature"></span>deleteDir<span class="signature">(user_id)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Deletes all user folder. This will delete all files and sub dirs             of the user.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>user_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fusers_index.js.html">fusers/index.js</a>, <a href="fusers_index.js.html#line88">line 88</a>
+        <a href="web_api_web_routes_routes_user_files_index.js.html">web/api_web_routes/routes/user_files/index.js</a>, <a href="web_api_web_routes_routes_user_files_index.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -1008,14 +447,14 @@
 
     
 
-    <h4 class="name" id="encode"><span class="type-signature"></span>encode<span class="signature">(data)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="changeUserPass"><span class="type-signature"></span>changeUserPass<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Encodes all the data into cipher encryption
+    Changes the user password.
 </div>
 
 
@@ -1051,13 +490,13 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
             
@@ -1071,144 +510,15 @@
         </tr>
 
     
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cipher_index.js.html">cipher/index.js</a>, <a href="cipher_index.js.html#line13">line 13</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="error"><span class="type-signature"></span>error<span class="signature">(msg)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Outputs the message with color (RED).
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-|
-
 <span class="param-type">Object</span>
 
 
@@ -1260,7 +570,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="console_index.js.html">console/index.js</a>, <a href="console_index.js.html#line32">line 32</a>
+        <a href="web_api_web_routes_routes_change_user_pass_index.js.html">web/api_web_routes/routes/change_user_pass/index.js</a>, <a href="web_api_web_routes_routes_change_user_pass_index.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -1309,14 +619,14 @@
 
     
 
-    <h4 class="name" id="formatUserDir"><span class="type-signature"></span>formatUserDir<span class="signature">(user_id, path)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Formats and return all the path of user files.
+    Delets the user and his files.
 </div>
 
 
@@ -1352,336 +662,35 @@
 
         <tr>
             
-                <td class="name"><code>user_id</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fusers_index.js.html">fusers/index.js</a>, <a href="fusers_index.js.html#line47">line 47</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getPermissionsForWeb"><span class="type-signature"></span>getPermissionsForWeb<span class="signature">(arr_perm)</span><span class="type-signature"> &rarr; {Object}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Gets the permissions and parses into boolean flags.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>arr_perm</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_user_permissions_index.js.html">db/user_permissions/index.js</a>, <a href="db_user_permissions_index.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
 <span class="param-type">Object</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
 
-    
-
-
-
-        
             
 
-    
+            
 
-    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">(msg)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+            <td class="description last"></td>
+        </tr>
 
-    
-
-
-
-<div class="description">
-    Outputs the message with color (GREEN).
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-|
-
 <span class="param-type">Object</span>
 
 
@@ -1733,7 +742,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="console_index.js.html">console/index.js</a>, <a href="console_index.js.html#line21">line 21</a>
+        <a href="web_api_web_routes_routes_delete_user_index.js.html">web/api_web_routes/routes/delete_user/index.js</a>, <a href="web_api_web_routes_routes_delete_user_index.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -1782,14 +791,14 @@
 
     
 
-    <h4 class="name" id="loadWebApi"><span class="type-signature"></span>loadWebApi<span class="signature">(server, db, cipher)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    <h4 class="name" id="doLogin"><span class="type-signature"></span>doLogin<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Loads all the rest api for webserver application.
+    Login user session function.
 </div>
 
 
@@ -1825,7 +834,7 @@
 
         <tr>
             
-                <td class="name"><code>server</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
@@ -1848,36 +857,13 @@
 
         <tr>
             
-                <td class="name"><code>db</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Db</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>cipher</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Cipher</span>
+<span class="param-type">Object</span>
 
 
             
@@ -1928,7 +914,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="web_api_web_routes_index.js.html">web/api_web_routes/index.js</a>, <a href="web_api_web_routes_index.js.html#line11">line 11</a>
+        <a href="web_api_web_routes_routes_login_index.js.html">web/api_web_routes/routes/login/index.js</a>, <a href="web_api_web_routes_routes_login_index.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -1977,14 +963,14 @@
 
     
 
-    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(msg)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    <h4 class="name" id="doLogout"><span class="type-signature"></span>doLogout<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Outputs the message with color (GREY).
+    Logout user session function.
 </div>
 
 
@@ -2020,15 +1006,35 @@
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-|
+<span class="param-type">Object</span>
 
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
@@ -2080,7 +1086,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="console_index.js.html">console/index.js</a>, <a href="console_index.js.html#line10">line 10</a>
+        <a href="web_api_web_routes_routes_logout_index.js.html">web/api_web_routes/routes/logout/index.js</a>, <a href="web_api_web_routes_routes_logout_index.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -2129,14 +1135,14 @@
 
     
 
-    <h4 class="name" id="readDir"><span class="type-signature"></span>readDir<span class="signature">(user_id, path)</span><span class="type-signature"> &rarr; {Array.&lt;String>}</span></h4>
+    <h4 class="name" id="editUser"><span class="type-signature"></span>editUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
 
     
 
 
 
 <div class="description">
-    Reads all the directory.
+    Edits the user information.
 </div>
 
 
@@ -2172,13 +1178,13 @@
 
         <tr>
             
-                <td class="name"><code>user_id</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
             
@@ -2195,164 +1201,12 @@
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fusers_index.js.html">fusers/index.js</a>, <a href="fusers_index.js.html#line67">line 67</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;String></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(msg)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Outputs the message with color (YELLOW).
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>msg</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-|
-
 <span class="param-type">Object</span>
 
 
@@ -2404,7 +1258,867 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="console_index.js.html">console/index.js</a>, <a href="console_index.js.html#line43">line 43</a>
+        <a href="web_api_web_routes_routes_edit_user_index.js.html">web/api_web_routes/routes/edit_user/index.js</a>, <a href="web_api_web_routes_routes_edit_user_index.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAllStats"><span class="type-signature"></span>getAllStats<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Statisctics of all user, viewers and administrators. (Only administrator permissions)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="web_api_web_routes_routes_statistics_get_index.js.html">web/api_web_routes/routes/statistics_get/index.js</a>, <a href="web_api_web_routes_routes_statistics_get_index.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getUserFile"><span class="type-signature"></span>getUserFile<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Gets the file data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="web_api_web_routes_routes_user_files_index.js.html">web/api_web_routes/routes/user_files/index.js</a>, <a href="web_api_web_routes_routes_user_files_index.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getUserFileForPreview"><span class="type-signature"></span>getUserFileForPreview<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Returns the file for preview.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="web_api_web_routes_routes_user_files_index.js.html">web/api_web_routes/routes/user_files/index.js</a>, <a href="web_api_web_routes_routes_user_files_index.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getUserFolder"><span class="type-signature"></span>getUserFolder<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Gets user files and folders by path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="web_api_web_routes_routes_user_files_index.js.html">web/api_web_routes/routes/user_files/index.js</a>, <a href="web_api_web_routes_routes_user_files_index.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="listUsers"><span class="type-signature"></span>listUsers<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    List all users. (Only administrator permissions)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="web_api_web_routes_routes_list_user_index.js.html">web/api_web_routes/routes/list_user/index.js</a>, <a href="web_api_web_routes_routes_list_user_index.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -2464,13 +2178,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-db.html">db</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ADMIN">ADMIN</a></li><li><a href="global.html#checkdirPattern">checkdirPattern</a></li><li><a href="global.html#checkNativeFolder">checkNativeFolder</a></li><li><a href="global.html#checkUserPerm">checkUserPerm</a></li><li><a href="global.html#decode">decode</a></li><li><a href="global.html#deleteDir">deleteDir</a></li><li><a href="global.html#encode">encode</a></li><li><a href="global.html#error">error</a></li><li><a href="global.html#formatUserDir">formatUserDir</a></li><li><a href="global.html#getPermissionsForWeb">getPermissionsForWeb</a></li><li><a href="global.html#info">info</a></li><li><a href="global.html#loadWebApi">loadWebApi</a></li><li><a href="global.html#log">log</a></li><li><a href="global.html#readDir">readDir</a></li><li><a href="global.html#USER">USER</a></li><li><a href="global.html#VIEWER">VIEWER</a></li><li><a href="global.html#warn">warn</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App_Sys.html">App_Sys</a></li><li><a href="module-Cipher.html">Cipher</a></li><li><a href="module-Console.html">Console</a></li><li><a href="module-Db.html">Db</a></li><li><a href="module-Db_User_Permissions.html">Db/User_Permissions</a></li><li><a href="module-FUsers.html">FUsers</a></li><li><a href="module-Mem.html">Mem</a></li><li><a href="module-Web.html">Web</a></li><li><a href="module-Web_Api_Web_Routes.html">Web/Api_Web_Routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addNewUser">addNewUser</a></li><li><a href="global.html#addUserFile">addUserFile</a></li><li><a href="global.html#changeUserPass">changeUserPass</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doLogin">doLogin</a></li><li><a href="global.html#doLogout">doLogout</a></li><li><a href="global.html#editUser">editUser</a></li><li><a href="global.html#getAllStats">getAllStats</a></li><li><a href="global.html#getUserFile">getUserFile</a></li><li><a href="global.html#getUserFileForPreview">getUserFileForPreview</a></li><li><a href="global.html#getUserFolder">getUserFolder</a></li><li><a href="global.html#listUsers">listUsers</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Fri Dec 04 2015 15:30:37 GMT+0000 (GMT Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Tue Feb 09 2016 12:41:12 GMT+0000 (GMT Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

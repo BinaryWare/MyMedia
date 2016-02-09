@@ -2,6 +2,14 @@ var ROOT_PATH   = '../../../../';
 var db          = require(ROOT_PATH+'db')();
 var global_func = require('../../global_functions');
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description Edits the user information.
+ */
 exports.editUser = function (req, res) {
     var response = 200;
     var body = req.body;

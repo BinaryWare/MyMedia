@@ -1,9 +1,8 @@
-var FILE_EXTENSIONS = ['pdf', 'jpg', 'png', 'jpeg', 'gif', 'ico'];
 var root_user_path = '/';
 var root_last_user_path = '';
 
 function resizeFileListWidget(){
-    var height_body = ($(window).height()-$($('.container-fluid')[0]).height())-49;
+    var height_body = ($(window).height()-$($('.container-fluid')[0]).height())-129;
     var width_body = ($(window).width()*70)/100;
     var style_attr = 'overflow-x: auto; height:'+height_body+'px; margin-top: 25px;';
     
@@ -31,28 +30,10 @@ function returnDir(){
     loadUserDir(res_dir);
 }
 
-function openFile(filename){
-    $('#f_viewer').val('');
-    startLoading();
-    $.ajax({
-        url: '/mmapi/fu/get/file',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            path: root_user_path,
-            file: filename
-        })
-    }).done(function (ufile_data) {
-        $('#f_viewer').val(window.atob(ufile_data));
-        finishLoading();
-    }).fail(function () {
-        $('#f_viewer').val('Cannot read file '+filename+'!');
-        messageBox('Cannot read file '+filename+'!', 'danger');
-        finishLoading();
-    });
-}
-
-function openFilePreview(filename){
+function openFilePreview(filename, elem){
+    $('#f_user_list').find('a').not(this).removeClass('active');
+    $(elem).addClass('active');
+    
     $('#f_viewer').attr('src', location.origin+'/mmapi/fu/get/preview?f='+window.encodeURIComponent(filename)+'&p='+window.encodeURIComponent(root_user_path));
 }
 
@@ -78,7 +59,7 @@ function loadUserDir(user_path) {
         var u_dir_length = u_dir.length;
 
         if(user_path !== '/')
-            html += '<a onclick="returnDir();" href="#" class="list-group-item"><span class="fa fa-folder"></span> ../</a>';
+            html += '<a onclick="returnDir();" href="#" class="list-group-item"><span class="fa fa-folder"></span> ../ (Previous Folder)</a>';
 
         if (u_dir_length === 0) {
             html += '<a href="#" class="list-group-item list-group-item-danger">There is no files!</a>';
@@ -89,17 +70,10 @@ function loadUserDir(user_path) {
                 var name = item.name;
                 var action_on_click = '';
                 
-                if(isFile){
-                    var name_split = name.split('.');
-                    var ext = name_split[name_split.length-1];
-                    
-                    if(FILE_EXTENSIONS.indexOf(ext)!==-1)
-                        action_on_click = 'openFilePreview(\''+name+'\');';    
-                    else
-                        action_on_click = 'openFile(\''+name+'\');';    
-                }else{
+                if(isFile)
+                    action_on_click = 'openFilePreview(\''+name+'\', this);';   
+                else
                     action_on_click = 'openDir(\''+name+'\');';
-                }
                 
                 html += '<a onclick="'+action_on_click+'" href="#" class="list-group-item"><span class="fa fa-'+(isFile?'file':'folder')+'"></span> '+name+'</a>';
             }
@@ -114,9 +88,48 @@ function loadUserDir(user_path) {
     });
 }
 
+function onUploadFile(){
+    startLoading();
+    
+    var fileList = this.files;
+    var file = fileList[0];
+    var reader = new FileReader();
+
+    reader.onload = function (file_res) {
+        var file_target = window.btoa(file_res.target.result);
+        
+        $.ajax({
+            url:'/mmapi/fu/add/file',
+            method:'POST',
+            contentType:'application/json',
+            data: JSON.stringify({
+                fname: file.name,
+                fpath: root_user_path,
+                fdata: file_target
+            })
+        }).done(function(){
+            $('#close_upload_file_modal_btn').click();
+            finishLoading();
+            messageBox('File uploaded successfully!', 'info');
+            loadUserDir();
+        }).fail(function () {
+            messageBox('Cannot upload this file!', 'danger');
+            finishLoading();
+        });
+    };
+
+    reader.readAsBinaryString(file);
+}
+
 $(document).ready(function () {
     resizeFileListWidget();
     loadUserDir();
+    
+    $('#add_file_btn').on('click', function(){
+        $('#upload_file_modal').modal('show');
+    });
+    
+    $('#upload_file_input').on('change', onUploadFile);
 });
 
 $(window).resize(function(){

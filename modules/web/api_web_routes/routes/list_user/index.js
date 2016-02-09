@@ -3,6 +3,14 @@ var db          = require(ROOT_PATH+'db')();
 var cipher      = require(ROOT_PATH+'cipher');
 var global_func = require('../../global_functions');
 
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * 
+ * @returns {undefined}
+ * 
+ * @description List all users. (Only administrator permissions)
+ */
 exports.listUsers = function (req, res) {
     var cookies = req.cookies;
     var isAdmin = global_func.isAdminUser(cookies);

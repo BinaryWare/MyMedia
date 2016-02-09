@@ -22,14 +22,18 @@ exports.loadWebApi = function (server) {
     var statistics = require('./routes/statistics_get');
     var user_files = require('./routes/user_files');
     
+    server.post('/mmapi/fu/add/file', user_files.addUserFile);
+    
     server.get('/mmapi/fu/get/preview', user_files.getUserFileForPreview);
     server.post('/mmapi/fu/get/file', user_files.getUserFile);
     server.post('/mmapi/fu/get/dir', user_files.getUserFolder);
     server.post('/mmapi/user/login', login.doLogin);
+    
     server.get('/mmapi/user/logout', logout.doLogout);
     server.post('/mmapi/user/delete/:username', del_user.deleteUser);
     server.post('/mmapi/user/cpwd', change_user_pass.changeUserPass);
     server.post('/mmapi/user/add', add_user.addNewUser);
+    
     server.post('/mmapi/user/edit', edit_user.editUser);
     server.get('/mmapi/users/list', list_users.listUsers);
     server.get('/mmapi/stats/get', statistics.getAllStats);

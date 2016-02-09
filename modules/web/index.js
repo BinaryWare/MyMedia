@@ -108,9 +108,11 @@ exports.loadWebServer = function (express, server) {
             var dec_mmu_user = dec_mmu_arr[0];
             var dec_mmu_perm = dec_mmu_arr[2];
             
-            data.isUserLogged = true;
-            data.username = dec_mmu_user;
-            data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);
+            if(page!=='file_not_found'){
+                data.isUserLogged = true;
+                data.username = dec_mmu_user;
+                data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);    
+            }
         }
         
         loadEctFile.render(res, page, data);
