@@ -22,7 +22,7 @@ exports.changeUserPass = function (req, res) {
         if (n_pwd === '' || n_pwd === undefined || n_pwd === ' ' || n_pwd.split('').length < 5) {
             response = 500;
         } else {
-            var isUserEdited = db.edit_user(user, o_pwd, n_pwd);
+            var isUserEdited = db.edit_user(user, n_pwd, o_pwd);
 
             if (!isUserEdited)
                 response = 201;

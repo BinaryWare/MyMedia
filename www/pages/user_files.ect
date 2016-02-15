@@ -9,11 +9,11 @@
                 <button class="btn btn-danger" id="del_file_btn"><span class="fa fa-trash"></span> Delete File</button>
             </div>
         </div>
-        
+
         <div class="pull-right">
             <div class="form-group"></div>
         </div>
-        
+
         <div class="clearfix"></div>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <div class="col-md-2 col-sm-3 col-lg-3">
         <div class="list-group" id="f_user_list"></div>
     </div>
-    
+
     <div class="col-md-10 col-sm-9 col-lg-9">
         <iframe id="f_viewer"></iframe>
     </div>
@@ -30,30 +30,42 @@
 
 <!-- Upload File Modal BEGIN -->
 <div class="modal" id="upload_file_modal" tabindex="-1" role="dialog" aria-labelledby="upload_file_modal_label">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="upload_file_modal_label">Modal title</h4>
-      </div>
-        
-      <div class="modal-body">
-          <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                  <div class="form-group">
-                      <div class="input-group">
-                          <div class="input-group-addon"><span class="fa fa-file-o"></span></div>
-                          <input id="upload_file_input" type="file" class="form-control" style="height: 100%;" />
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-        
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="close_upload_file_modal_btn"><span class="fa fa-times"></span> Close</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="upload_file_modal_label">Modal title</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group" id="upload_file_area">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="fa fa-file-o"></span></div>
+                                <input id="upload_file_input" type="file" class="form-control" style="height: 100%;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group" id="upload_file_progress_area">
+                            <div class="progress">
+                                <div id="upload_file_progress" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    0%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close_upload_file_modal_btn"><span class="fa fa-times"></span> Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Upload File Modal END -->
 

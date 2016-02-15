@@ -33,9 +33,9 @@ function checkNativeFolder() {
 function checkdirPattern(dir) {
     var PATTERN = '../';
     var res_dir = dir;
-    if (dir.indexOf(PATTERN) !== -1) {
+    if (dir.indexOf(PATTERN) !== -1) 
         res_dir = dir.replace(PATTERN, '');
-    }
+    
     return res_dir;
 }
 
@@ -49,12 +49,11 @@ function checkdirPattern(dir) {
  * @description Formats and return all the path of user files.
  */
 function formatUserDir(user_id, path) {
-    var fullPath = (FUSER_DIR + '/' + user_id + '/');
+    var fullPath = (FUSER_DIR + '/' + user_id);
     var dirPattern = checkdirPattern(path);
     
-    if(path!==''){
+    if(path!=='')
         fullPath += dirPattern;
-    }
     
     return fullPath;
 }
@@ -73,14 +72,14 @@ function readDir(user_id, path) {
     
     try {
         var user_path = formatUserDir(user_id, path);
-        res = fs.readdirSync(user_path);
         
-        res = res.map(function(fitem){
+        res = fs.readdirSync(user_path);
+        res = res.map(function (fitem) {
             var item = {
-                isFile: fs.lstatSync(user_path+fitem).isFile(),
-                name:fitem
+                isFile: fs.lstatSync(user_path + fitem).isFile(),
+                name: fitem
             };
-            
+
             return item;
         });
     } catch (ex) {
@@ -102,6 +101,29 @@ function readDir(user_id, path) {
  */
 function deleteDir(user_id) {
     fs_e.removeSync(FUSER_DIR + '/' + user_id);
+}
+
+/**
+ * @param {String} userid
+ * @param {String} filename
+ * @param {String} path
+ * 
+ * @description Checks if the file exists.
+ * 
+ * @returns {boolean}
+ */
+function isFileExists(userid, filename, path) {
+    if(path===undefined)
+        path = '';
+    
+    var res = true;
+    try {
+        fs.openSync(formatUserDir(userid, path) + checkdirPattern(filename), 'r');
+    } catch (ex) {
+        res = false;
+    } finally {
+        return res;
+    }
 }
 
 module.exports = function () {
@@ -134,8 +156,23 @@ module.exports = function () {
      * 
      * @description Creates a file with all the data.
      */
-    fuser_api.writeUserFile = function (user_id, path, filename, file_data, callback) {
-        fs.writeFile(formatUserDir(user_id, path) + checkdirPattern(filename), file_data, callback);
+    fuser_api.writeUserFile = function (user_id, path, filename, file_data, append_data, callback) {
+        var file_full_path = formatUserDir(user_id, path) + checkdirPattern(filename);
+        
+        if(!append_data){
+            var fileWriteStream = fs.createWriteStream(file_full_path);
+
+            fileWriteStream.on('finish', function() {
+                callback();
+            });
+        
+            fileWriteStream.write(file_data);
+            fileWriteStream.end();    
+        }else{
+            fs.appendFile(file_full_path, file_data, function(){
+                callback();
+            });
+        }
     };
 
     /**
@@ -221,6 +258,8 @@ module.exports = function () {
         
         return exists;
     };
+    
+    fuser_api.isFileExists = isFileExists;
 
     return fuser_api;
 };

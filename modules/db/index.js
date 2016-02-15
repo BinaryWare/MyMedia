@@ -285,7 +285,7 @@ module.exports = function () {
      */
     db_api.edit_user = function (username, password, old_password) {
         var isUserReg = false;
-
+        
         if (checkDBUserExists(username)) {
             var old_password_c = cipher.encode(old_password);
             var password_c = cipher.encode(password);

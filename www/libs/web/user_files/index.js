@@ -88,40 +88,138 @@ function loadUserDir(user_path) {
     });
 }
 
+function uploadFinishedCallback(isUploadFailed){
+    var msg = 'File uploaded successfully!';
+    var msg_type = 'info';
+
+    $('#upload_file_progress_area').hide();
+    $('#upload_file_progress').html('0 %');
+    $('#upload_file_progress').attr('style', 'width: 0%;');
+
+    if (isUploadFailed) {
+        msg = 'Cannot upload this file!';
+        msg_type = 'danger';
+    } else {
+        loadUserDir();
+        $('#close_upload_file_modal_btn').click();
+    }
+
+    messageBox(msg, msg_type);
+    finishLoading();
+}
+
+function submitFile(filename, firstUpload, file_result, sucess_callback, failed_callback) {
+    file_result = window.btoa(file_result);
+
+    $.ajax({
+        url: '/mmapi/fu/add/file',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            fname: filename,
+            fpath: root_user_path,
+            fdata: file_result,
+            foverwrite: firstUpload
+        })
+    }).done(function () {
+        sucess_callback();
+    }).fail(function () {
+        failed_callback();
+    });
+}
+
 function onUploadFile(){
     startLoading();
     
+    var firstUpload = true;
+    var BLOB_SIZE_LIMIT = 1024*1024;
+    var blobFileSectors = 0;
+    var isUploadFailed = false;
+    
     var fileList = this.files;
     var file = fileList[0];
-    var reader = new FileReader();
+    var fileSize = file.size;
+    var filename = file.name;
+    
+    $('#upload_file_progress_area').show();
+    
+    if(fileSize<=BLOB_SIZE_LIMIT){
+        var reader = new FileReader();
 
-    reader.onload = function (file_res) {
-        var file_target = window.btoa(file_res.target.result);
+        reader.onloadend = function (file_res) {
+            var file_result = file_res.target.result;
+
+            submitFile(filename, firstUpload, file_result, function () {
+                uploadFinishedCallback(false);
+            }, function () {
+                uploadFinishedCallback(true);
+            });
+        };
         
-        $.ajax({
-            url:'/mmapi/fu/add/file',
-            method:'POST',
-            contentType:'application/json',
-            data: JSON.stringify({
-                fname: file.name,
-                fpath: root_user_path,
-                fdata: file_target
-            })
-        }).done(function(){
-            $('#close_upload_file_modal_btn').click();
-            finishLoading();
-            messageBox('File uploaded successfully!', 'info');
-            loadUserDir();
-        }).fail(function () {
-            messageBox('Cannot upload this file!', 'danger');
-            finishLoading();
-        });
-    };
+        reader.onprogress = function(e){
+            var calcPercentage = Math.round((e.loaded * 100) / e.total);
 
-    reader.readAsBinaryString(file);
+            $('#upload_file_progress').html(calcPercentage + ' %');
+            $('#upload_file_progress').attr('style', 'width: ' + calcPercentage + '%;');
+        };
+
+        reader.onerror = function (e) {
+            uploadFinishedCallback(true);
+        };
+        
+        reader.readAsBinaryString(file);
+    } else {
+        var items = new Array(Math.round(fileSize / BLOB_SIZE_LIMIT));
+        async.forEachOfSeries(items, function (value, key, callback) {
+            var calcPercentage = function () {
+                return Math.round((key * 100) / items.length);
+            };
+
+            $('#upload_file_progress').html(calcPercentage() + ' %');
+            $('#upload_file_progress').attr('style', 'width: ' + calcPercentage() + '%;');
+
+            var reader = new FileReader();
+
+            reader.onloadend = function (file_res) {
+                var file_result = file_res.target.result;
+
+                submitFile(filename, firstUpload, file_result, function(){
+                    if (firstUpload)
+                        firstUpload = false;
+                    
+                    callback();
+                }, function(){
+                    isUploadFailed = true;
+                    
+                    callback();
+                });
+            };
+
+            reader.onerror = function (e) {
+                isUploadFailed = true;
+                callback();
+            };
+
+            var nextBlob = blobFileSectors + BLOB_SIZE_LIMIT;
+            if (blobFileSectors >= fileSize)
+                blobFileSectors = fileSize;
+
+            if (nextBlob >= fileSize)
+                nextBlob = fileSize;
+
+            var fileData = file.slice(blobFileSectors, nextBlob);
+            reader.readAsBinaryString(fileData);
+
+            blobFileSectors = nextBlob;
+        }, function () {
+            uploadFinishedCallback(isUploadFailed);
+        });
+    }
 }
 
 $(document).ready(function () {
+    $('#upload_file_progress_area').hide();
+    
     resizeFileListWidget();
     loadUserDir();
     
@@ -130,6 +228,10 @@ $(document).ready(function () {
     });
     
     $('#upload_file_input').on('change', onUploadFile);
+    
+    $('#add_folder_btn').on('click', function(){
+        $('#add_folder_modal').modal('show');
+    });
 });
 
 $(window).resize(function(){

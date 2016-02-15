@@ -85,12 +85,16 @@ exports.addUserFile = function(req, res){
     var fname = body.fname;
     var fpath = body.fpath;
     var fdata = body.fdata;
+    var foverwrite = body.foverwrite;
     var userid = global_func.getCookieField(cookies, 0);
     
     userid = cipher.encode(userid);
     fdata = new Buffer(fdata, 'base64');
     
-    fusers.writeUserFile(userid, fpath, fname, fdata, function(){
+    if(fusers.isFileExists(userid, fname, fpath) && foverwrite)
+        fusers.deleteUserFile(userid, fpath, fname);
+    
+    fusers.writeUserFile(userid, fpath, fname, fdata, !foverwrite, function(){
         res.send('Ok');
     });
 };
