@@ -109,10 +109,10 @@ function loadUserDir(user_path) {
         var u_dir_length = u_dir.length;
 
         if(user_path !== '/')
-            html += '<a onclick="returnDir();" href="#" class="list-group-item"><span class="fa fa-folder"></span> ../ (Previous Folder)</a>';
+            html += '<a onclick="returnDir();" class="list-group-item"><span class="fa fa-folder"></span> ../ (Previous Folder)</a>';
 
         if (u_dir_length === 0) {
-            html += '<a href="#" class="list-group-item list-group-item-danger">There is no files!</a>';
+            html += '<a class="list-group-item list-group-item-danger">There is no files!</a>';
         } else {
             for (var c = 0;c < u_dir_length; c++) {
                 var item = u_dir[c];
@@ -125,7 +125,7 @@ function loadUserDir(user_path) {
                 else
                     action_on_click = 'openDir(\''+name+'\', this, event);';
 
-                html += '<a onmousedown="'+action_on_click+'" href="#" class="list-group-item"><span class="fa fa-'+(isFile?'file':'folder')+'"></span> '+name+'</a>';
+                html += '<a onmousedown="'+action_on_click+'" class="list-group-item"><span class="fa fa-'+(isFile?'file':'folder')+'"></span> '+name+'</a>';
             }
         }
 

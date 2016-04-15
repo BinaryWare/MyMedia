@@ -19,18 +19,14 @@ $(window).resize(function(){
     resizeFileListWidget();
 });
 
-$(window).on('click', function(e){
-  var target_elem = $(e.target);
+$('.content').on('mouseup', function(e){
+  e.preventDefault();
 
-  if(!target_elem.hasClass('list-group-item') && !e.ctrlKey && e.which===1){
-    e.preventDefault();
-
+  if(!$(e.target).hasClass('list-group-item') && !e.ctrlKey && e.which===1){
     $('#f_user_list').find('a').not(this).removeClass('active');
     $('#f_viewer').attr('src', 'about:blank');
     $('#del_file_btn').addClass('disabled');
 
     selected_file_list = [];
-  } else {
-    target_elem.click();
   }
 });
