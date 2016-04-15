@@ -3,14 +3,14 @@
   "description": "MyMedia -- media center.",
   "version": "1.0.0",
   "main": "mymedia_main.js",
-  "author": "BNeto",
+  "author": "BiosWare",
   "keywords": [],
   "licenses": {
     "type": "none"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bneto/MyMedia"
+    "url": "https://github.com/BiosWare/MyMedia"
   },
   "dependencies": {
     "bluebird": "^2.10.0",
