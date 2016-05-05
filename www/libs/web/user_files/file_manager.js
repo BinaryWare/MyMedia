@@ -27,12 +27,7 @@ function addItemToMultiSelector(isElemActive, item){
     $('#del_file_btn').removeClass('disabled');
 }
 
-function detectActiveElement(elem, isElemActive, ctrlKey){
-  if(!ctrlKey){
-    $('#f_user_list').find('a').not(this).removeClass('active');
-    selected_file_list = [];
-  }
-
+function detectActiveElement(elem, isElemActive){
   if(isElemActive){
     $(elem).removeClass('active');
     $('#del_file_btn').addClass('disabled');
@@ -40,6 +35,8 @@ function detectActiveElement(elem, isElemActive, ctrlKey){
     $(elem).addClass('active');
     $('#del_file_btn').removeClass('disabled');
   }
+
+  addItemToMultiSelector(isElemActive, $(elem).attr('data-name'));
 }
 
 function returnDir(){
@@ -57,34 +54,34 @@ function returnDir(){
     loadUserDir(res_dir);
 }
 
-function openDir(folder, elem, event){
+function openDir(folder, elem){
     var isElemActive = $(elem).hasClass('active');
 
-    detectActiveElement(elem, isElemActive, event.ctrlKey);
+    root_last_user_path = root_user_path;
+    root_user_path += folder+'/';
 
-    if(!event.ctrlKey){
-      root_last_user_path = root_user_path;
-      root_user_path += folder+'/';
-
-      loadUserDir(root_user_path);
-    }else{
-      addItemToMultiSelector(isElemActive, folder);
-    }
+    loadUserDir(root_user_path);
 }
 
 function openFilePreview(filename, elem, event){
     var isElemActive = $(elem).hasClass('active');
 
-    detectActiveElement(elem, isElemActive, event.ctrlKey);
+    detectActiveElement(elem, isElemActive);
 
-    if(!event.ctrlKey){
-      if(!isElemActive)
-        $('#f_viewer').attr('src', location.origin+'/mmapi/fu/get/preview?f='+window.encodeURIComponent(filename)+'&p='+window.encodeURIComponent(root_user_path));
-      else
-        $('#f_viewer').attr('src', 'about:blank');
-    }else{
-      addItemToMultiSelector(isElemActive, filename);
-    }
+    if(!isElemActive)
+      $('#f_viewer').attr('src', location.origin+'/mmapi/fu/get/preview?f='+window.encodeURIComponent(filename)+'&p='+window.encodeURIComponent(root_user_path));
+    else
+      $('#f_viewer').attr('src', 'about:blank');
+}
+
+function selectElement(filename, elem){
+  var data_is_dir = $(elem).attr('data-is-file');
+  var isElemActive = $(elem).hasClass('active');
+
+  if(data_is_dir==='false')
+    openDir(filename, elem);
+  else
+    openFilePreview(filename, elem);
 }
 
 function loadUserDir(user_path) {
@@ -120,12 +117,7 @@ function loadUserDir(user_path) {
                 var name = item.name;
                 var action_on_click = '';
 
-                if(isFile)
-                    action_on_click = 'openFilePreview(\''+name+'\', this, event);';
-                else
-                    action_on_click = 'openDir(\''+name+'\', this, event);';
-
-                html += '<a onmousedown="'+action_on_click+'" class="list-group-item"><span class="fa fa-'+(isFile?'file':'folder')+'"></span> '+name+'</a>';
+                html += '<a data-is-file="'+isFile+'" data-name="'+name+'" onclick="" ondblclick="selectElement(\''+name+'\', this);" class="list-group-item"><span class="fa fa-'+(isFile?'file':'folder')+'"></span> '+name+'</a>';
             }
         }
 

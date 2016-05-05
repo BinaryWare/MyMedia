@@ -7,16 +7,16 @@ var ECT              = require('ect');
 var body_parser      = require('body-parser');
 var cookie_parser    = require('cookie-parser');
 var sec_routes       = [
-                            '/main', 
-                            '/settings', 
-                            '/mmapi/user/logout', 
-                            '/mmapi/user/cpwd', 
-                            '/user_manager', 
-                            '/mmapi/user/add', 
-                            '/mmapi/user/cpwd', 
+                            '/main',
+                            '/settings',
+                            '/mmapi/user/logout',
+                            '/mmapi/user/cpwd',
+                            '/user_manager',
+                            '/mmapi/user/add',
+                            '/mmapi/user/cpwd',
                             '/mmapi/user/edit',
                             '/mmapi/users/list',
-                            '/mmapi/stats/get'  
+                            '/mmapi/stats/get'
                         ];
 var HEADERS_SETTINGS = {
                         'X-Frame-Options': 'SAMEORIGIN',
@@ -34,18 +34,22 @@ var db               = require('../db')();
 
 exports.loadWebServer = function (express, server) {
     //Third-party functions
-    
+
     function setAllHeaders(res) {
         res.set(HEADERS_SETTINGS);
         res.removeHeader('X-Powered-By');
     }
-    
+
     function hasCookie(cookies){
         return (cookies.mmu!==undefined);
     }
-    
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     // Set all server configurations
-    
+
     server.use(body_parser.urlencoded({extended: false}));
     server.use(body_parser.json({ limit: '200mb' }));
     server.engine('ect', renderECT.render);
@@ -55,26 +59,26 @@ exports.loadWebServer = function (express, server) {
             setAllHeaders(res);
         }
     }));
-    
-        
+
+
     // Server Filter
     server.use(function(req, res, next){
         var mmu=req.cookies.mmu;
 
         setAllHeaders(res);
-        
+
        ((mmu===undefined) && (sec_routes.indexOf(req.url)!==-1))? res.redirect('/') : next();
     });
-    
-    
+
+
     //==========================================================================
     //======================== Server Routes ===================================
     //==========================================================================
-    
+
     // Server API
-    
+
     web_api.loadWebApi(server);
-    
+
     /**
      * Route Web Method: GET
      *
@@ -82,10 +86,10 @@ exports.loadWebServer = function (express, server) {
      **/
     server.get('/', function (req, res) {
         var route = 'login';
-        
+
         if(hasCookie(req.cookies))
             route = 'main';
-        
+
         res.redirect('/'+route);
     });
 
@@ -101,21 +105,20 @@ exports.loadWebServer = function (express, server) {
         var cookies = req.cookies;
         var mmu = cookies.mmu;
         var data = {};
-        
+
         if(hasCookie(cookies)){
             var dec_mmu = cipher.decode(mmu);
             var dec_mmu_arr = dec_mmu.split(';');
             var dec_mmu_user = dec_mmu_arr[0];
             var dec_mmu_perm = dec_mmu_arr[2];
-            
+
             if(page!=='file_not_found'){
                 data.isUserLogged = true;
-                data.username = dec_mmu_user;
-                data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);    
+                data.username = capitalizeFirstLetter(dec_mmu_user);
+                data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);
             }
         }
-        
+
         loadEctFile.render(res, page, data);
     });
 };
-

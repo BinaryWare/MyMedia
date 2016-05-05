@@ -19,11 +19,11 @@ var BROWSER_SETTINGS = {
 exports.loadAppSys = function(){
     app.on('ready', function(){
         bWinObj = new BrowserWindow(BROWSER_SETTINGS);
-    
+
         bWinObj.loadUrl('http://localhost:9900/');
         bWinObj.show();
     });
-    
+
     app.on('window-all-closed', function() {
         app.quit();
     });

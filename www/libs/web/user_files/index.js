@@ -13,6 +13,11 @@ $(document).ready(function () {
     $('#add_folder_btn').on('click', function(){
         $('#add_folder_modal').modal('show');
     });
+
+    $('#close_create_folder_modal_btn').on('click', function(){
+      $('#add_folder_modal').modal('hide');
+      $('#create_folder_input').val('');
+    });
 });
 
 $(window).resize(function(){
@@ -22,11 +27,15 @@ $(window).resize(function(){
 $('.content').on('mouseup', function(e){
   e.preventDefault();
 
-  if(!$(e.target).hasClass('list-group-item') && !e.ctrlKey && e.which===1){
+  var elem = $(e.target);
+  if(!elem.hasClass('list-group-item')){
     $('#f_user_list').find('a').not(this).removeClass('active');
     $('#f_viewer').attr('src', 'about:blank');
     $('#del_file_btn').addClass('disabled');
 
     selected_file_list = [];
+  } else {
+    var isElemActive = elem.hasClass('active');
+    detectActiveElement(elem, isElemActive);
   }
 });
