@@ -8,25 +8,27 @@
     <% end %>
 
     <link rel="icon" href="libs/web/img/mm_icon.png" />
-    
+
     <% include 'header_layout.ect' %>
 </head>
 <body>
     <% if @isUserLogged!=undefined: %>
         <% include 'main_menu.ect' %>
-        
+
         <div class="content">
     <% end %>
-    
+
     <div class="container-fluid">
         <% content %>
     </div>
-    
+
     <% if @isUserLogged!=undefined: %>
         </div>
     <% end %>
-    
+
     <% include 'loading_layout.ect' %>
     <% include 'messagebox_layout.ect' %>
+
+    <input type="hidden" id="server_port_value" value="<%- @SERVER_PORT %>">
 </body>
 </html>

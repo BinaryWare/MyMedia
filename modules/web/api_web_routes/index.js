@@ -20,6 +20,7 @@ exports.loadWebApi = function (server) {
     var edit_user = require('./routes/edit_user');
     var list_users = require('./routes/list_user');
     var statistics = require('./routes/statistics_get');
+    var server_ips = require('./routes/statistics_get/server_ips.js');
     var user_files = require('./routes/user_files');
 
     server.post('/mmapi/fu/add/file', user_files.addUserFile);
@@ -38,4 +39,5 @@ exports.loadWebApi = function (server) {
     server.post('/mmapi/user/edit', edit_user.editUser);
     server.get('/mmapi/users/list', list_users.listUsers);
     server.get('/mmapi/stats/get', statistics.getAllStats);
+    server.get('/mmapi/network/stats/get', server_ips.getAllNetworks);
 };

@@ -9,7 +9,7 @@ var sys_params = require('./modules/sys_parameters');
 sys_params.detectParams(process);
 
 // Loads all webserver resources
-webS.loadWebServer(express, server);
+webS.loadWebServer(express, server, SERVER_PORT);
 
 // Server Listener
 server.listen(SERVER_PORT, function(){

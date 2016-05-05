@@ -32,7 +32,7 @@ var web_api          = require('./api_web_routes');
 var cipher           = require('../cipher');
 var db               = require('../db')();
 
-exports.loadWebServer = function (express, server) {
+exports.loadWebServer = function (express, server, SERVER_PORT) {
     //Third-party functions
 
     function setAllHeaders(res) {
@@ -116,6 +116,7 @@ exports.loadWebServer = function (express, server) {
                 data.isUserLogged = true;
                 data.username = capitalizeFirstLetter(dec_mmu_user);
                 data.user_pm = db.getPermissionsForWeb(dec_mmu_perm);
+                data.SERVER_PORT = SERVER_PORT;
             }
         }
 

@@ -7,9 +7,9 @@ var global_func = require('../../global_functions');
 /**
  * @param {Object} req
  * @param {Object} res
- * 
+ *
  * @returns {undefined}
- * 
+ *
  * @description Statisctics of all user, viewers and administrators. (Only administrator permissions)
  */
 exports.getAllStats = function (req, res) {
@@ -60,4 +60,3 @@ exports.getAllStats = function (req, res) {
         res.sendStatus(403);
     }
 };
-
