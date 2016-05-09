@@ -1,4 +1,4 @@
-![Application Icon](https://raw.githubusercontent.com/Bneto/MyMedia/master/mm_icon.png)
+![Application Icon](https://raw.githubusercontent.com/BinaryWare/MyMedia/master/mm_icon.png)
 # MyMedia #
 ================================================================================
 
@@ -31,6 +31,6 @@ online resources like online channels.
 
 There is the structure of all application.
 
-![Application Structure](https://raw.githubusercontent.com/Bneto/MyMedia/master/MyMediaV_1.0.png)
+![Application Structure](https://raw.githubusercontent.com/BinaryWare/MyMedia/master/MyMediaV_1.0.png)
 
 --------------------------------------------------------------------------------
